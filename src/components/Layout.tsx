@@ -23,7 +23,7 @@ export const Layout: React.FC<Title> = ({ children, title }) => {
             <div className='navbar flex items-center bg-orange-400 '>
               <div className='container mx-auto pl-3 lg:px-28'>
                 <div className='flex-1'>
-                  <button className='pointer font-semibold'>Home</button>
+                  <button className='font-semibold'>Home</button>
                 </div>
                 <div className='justify-end'>
                   <div>
@@ -68,7 +68,7 @@ export const Layout: React.FC<Title> = ({ children, title }) => {
         </div>
         <div className='drawer-side'>
           <label htmlFor='my-drawer' className='drawer-overlay'></label>
-          <ul className='menu bg-base-100 text-base-content w-60 overflow-y-auto p-4'>
+          <ul className='menu w-60 overflow-y-auto bg-base-100 p-4 text-base-content'>
             <li>
               <a>Sidebar Item 1</a>
             </li>
