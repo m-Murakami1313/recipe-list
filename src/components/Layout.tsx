@@ -38,7 +38,7 @@ export const Layout: React.FC<Title> = ({ children, title }) => {
                       ))}
                       {!session ? (
                         <button className='btn btn-ghost font-normal' onClick={() => signIn()}>
-                          サインイン
+                          サインイン・新規登録
                         </button>
                       ) : (
                         <button className='btn btn-ghost font-normal' onClick={() => signOut()}>
@@ -85,7 +85,7 @@ export const Layout: React.FC<Title> = ({ children, title }) => {
                     className='btn btn-ghost flex items-center rounded-lg p-2 text-base font-normal text-gray-900 hover:bg-gray-100  '
                     onClick={() => signIn()}
                   >
-                    サインイン
+                    サインイン・新規登録
                   </li>
                 ) : (
                   <li
