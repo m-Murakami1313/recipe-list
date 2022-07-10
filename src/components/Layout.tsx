@@ -11,7 +11,10 @@ export const Layout: React.FC<Title> = ({ children, title }) => {
   const { data: session, status } = useSession()
   const loading = status === 'loading'
 
-  const pages = [{ name: 'レシピ作成' }, { name: 'レシピリスト作成' }]
+  const pages = [
+    { name: 'レシピ作成', href: 'createRecipe' },
+    { name: 'レシピリスト作成', href: 'recipeList' },
+  ]
 
   return (
     <div className=' '>
@@ -26,14 +29,22 @@ export const Layout: React.FC<Title> = ({ children, title }) => {
             <div className='navbar flex items-center bg-orange-400 '>
               <div className='container mx-auto pl-3 lg:px-16 2xl:px-28'>
                 <div className='flex-1'>
-                  <button className='font-normal'>Home</button>
+                  <Link href={'/'}>
+                    <a>
+                      <button className='font-normal'>Home</button>
+                    </a>
+                  </Link>
                 </div>
                 <div className='justify-end'>
                   <div>
                     <div className='hidden space-x-3 md:inline-block'>
                       {pages.map((page) => (
                         <div key={page.name} className='hidden md:inline-block'>
-                          <button className='btn btn-ghost font-normal'>{page.name}</button>
+                          <Link href={{ pathname: `/${page.href}` }}>
+                            <a>
+                              <button className='btn btn-ghost font-normal'>{page.name}</button>
+                            </a>
+                          </Link>
                         </div>
                       ))}
                       {!session ? (
@@ -75,9 +86,11 @@ export const Layout: React.FC<Title> = ({ children, title }) => {
               <ul className='space-y-2'>
                 {pages.map((page) => (
                   <div key={page.name}>
-                    <li className='btn btn-ghost flex items-center rounded-lg p-2 text-base font-normal text-gray-900 hover:bg-gray-100 '>
-                      <a>{page.name}</a>
-                    </li>
+                    <Link href={{ pathname: `/${page.href}` }}>
+                      <li className='btn btn-ghost flex items-center rounded-lg p-2 text-base font-normal text-gray-900 hover:bg-gray-100 '>
+                        <a>{page.name}</a>
+                      </li>
+                    </Link>
                   </div>
                 ))}
                 {!session ? (
