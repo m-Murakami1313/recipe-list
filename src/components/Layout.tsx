@@ -1,29 +1,35 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import Header from './UI/template/Header'
 
 interface Title {
   title: string
-  children: React.ReactNode;
+  children: React.ReactNode
 }
 
 export const Layout: React.FC<Title> = ({ children, title }) => {
+  const menuList = [
+    { name: 'about', link: '#about' },
+    {
+      name: 'skills',
+      link: '#skills',
+    },
+    {
+      name: 'values',
+      link: '#values',
+    },
+    {
+      name: 'future',
+      link: '#future',
+    },
+  ];
   return (
     <div className='flex justify-center' items-center>
       <Head>
         <title>{title}</title>
         <link rel='icon' href='/favicon.ico' />
       </Head>
-      <header>
-        <nav className='w-screen bg-gray-800'>
-          <div className='flex items-center'>
-            <div className='flex space-x-4'>
-              <Link href='/'>
-                <a className='text-gray-300'>Home</a>
-              </Link>
-            </div>
-          </div>
-        </nav>
-      </header>
+      <Header menuList={menuList}></Header>
       <main>{children}</main>
     </div>
   )
