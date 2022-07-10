@@ -10,6 +10,9 @@ interface Title {
 export const Layout: React.FC<Title> = ({ children, title }) => {
   const { data: session, status } = useSession()
   const loading = status === 'loading'
+
+  const pages = [{ name: 'レシピ作成' }, { name: 'レシピリスト作成' }]
+
   return (
     <div className=' '>
       <Head>
@@ -21,27 +24,26 @@ export const Layout: React.FC<Title> = ({ children, title }) => {
         <div className='drawer-content'>
           <header>
             <div className='navbar flex items-center bg-orange-400 '>
-              <div className='container mx-auto pl-3 lg:px-28'>
+              <div className='container mx-auto pl-3 lg:px-16 2xl:px-28'>
                 <div className='flex-1'>
-                  <button className='font-semibold'>Home</button>
+                  <button className='font-normal'>Home</button>
                 </div>
                 <div className='justify-end'>
                   <div>
-                    <div className='hidden space-x-12 md:inline-block'>
-                      <button className='btn'>a</button>
-                      <button className='btn'>a</button>
+                    <div className='hidden space-x-3 md:inline-block'>
+                      {pages.map((page) => (
+                        <div key={page.name} className='hidden md:inline-block'>
+                          <button className='btn btn-ghost font-normal'>{page.name}</button>
+                        </div>
+                      ))}
                       {!session ? (
-                        <>
-                          <button className='btn btn-ghost ' onClick={() => signIn()}>
-                            Sign in
-                          </button>
-                        </>
+                        <button className='btn btn-ghost font-normal' onClick={() => signIn()}>
+                          サインイン
+                        </button>
                       ) : (
-                        <>
-                          <button className='btn btn-ghost ' onClick={() => signOut()}>
-                            Sign out
-                          </button>
-                        </>
+                        <button className='btn btn-ghost font-normal' onClick={() => signOut()}>
+                          サインアウト
+                        </button>
                       )}
                     </div>
                     <label htmlFor='my-drawer' className='btn btn-ghost drawer-button md:hidden'>
@@ -64,18 +66,38 @@ export const Layout: React.FC<Title> = ({ children, title }) => {
               </div>
             </div>
           </header>
-          <main className='container mx-auto px-8 lg:px-28'>{children}</main>
+          <main className='container mx-auto px-8 lg:px-16 2xl:px-28'>{children}</main>
         </div>
         <div className='drawer-side'>
           <label htmlFor='my-drawer' className='drawer-overlay'></label>
-          <ul className='menu w-60 overflow-y-auto bg-base-100 p-4 text-base-content'>
-            <li>
-              <a>Sidebar Item 1</a>
-            </li>
-            <li>
-              <a>Sidebar Item 2</a>
-            </li>
-          </ul>
+          <aside className='w-64' aria-label='Sidebar'>
+            <div className='m-1 overflow-y-auto rounded-md bg-gray-50 py-4 px-3 '>
+              <ul className='space-y-2'>
+                {pages.map((page) => (
+                  <div key={page.name}>
+                    <li className='btn btn-ghost flex items-center rounded-lg p-2 text-base font-normal text-gray-900 hover:bg-gray-100 '>
+                      <a>{page.name}</a>
+                    </li>
+                  </div>
+                ))}
+                {!session ? (
+                  <li
+                    className='btn btn-ghost flex items-center rounded-lg p-2 text-base font-normal text-gray-900 hover:bg-gray-100  '
+                    onClick={() => signIn()}
+                  >
+                    サインイン
+                  </li>
+                ) : (
+                  <li
+                    className='btn btn-ghost flex items-center rounded-lg p-2 text-base font-normal text-gray-900 hover:bg-gray-100 '
+                    onClick={() => signOut()}
+                  >
+                    サインアウト
+                  </li>
+                )}
+              </ul>
+            </div>
+          </aside>
         </div>
       </div>
     </div>
