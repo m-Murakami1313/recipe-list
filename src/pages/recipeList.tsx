@@ -9,6 +9,8 @@ const RecipeList: NextPage = () => {
   const [pick, setPick] = useState('')
   const [recipeFlag, setRecipeFlag] = useState(false)
 
+  const options = ['月', '火', '水', '木', '金', '土']
+
   const getTarget = (e: any) => {
     const recipeData = [...recipes]
     const targetData = recipeData[e.target.id]
@@ -110,11 +112,9 @@ const RecipeList: NextPage = () => {
                       <option disabled selected>
                         Pick your favorite Simpson
                       </option>
-                      <option>月</option>
-                      <option>火</option>
-                      <option>水</option>
-                      <option>木</option>
-                      <option>金</option>
+                      {options.map((option) => (
+                        <option key={option}>{option}</option>
+                      ))}
                     </select>
                     <button onClick={onSubmitList}>登録</button>
                   </>
