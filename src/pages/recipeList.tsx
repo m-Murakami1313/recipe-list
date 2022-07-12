@@ -1,13 +1,22 @@
 import type { NextPage } from 'next'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Layout } from '@/components/Layout'
+
 import { Table } from '@/components/UI/atom/Table'
+import { useDeleteRecipe } from '@/hooks/useDeleteRecipe'
+import { dayOfWeek } from '@/libs/tableData'
 
 const RecipeList: NextPage = () => {
   const [recipes, setRecipes] = useState([])
   const [pick, setPick] = useState('')
   const [recipeFlag, setRecipeFlag] = useState(false)
+
+  const { tableData, setTableData, deleteRecipe } = useDeleteRecipe()
+
+  useEffect(() => {
+    setTableData(dayOfWeek)
+  }, [])
 
   const options = ['月', '火', '水', '木', '金', '土']
 
@@ -41,7 +50,7 @@ const RecipeList: NextPage = () => {
     <div>
       <Layout title='Home'>
         <div className='flex items-center justify-center'>
-          <Table />
+          <Table tableData={tableData} deleteRecipe={deleteRecipe} />
         </div>
         <div className='flex items-center justify-center'>
           <div>

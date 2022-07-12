@@ -1,8 +1,16 @@
 import type { NextPage } from 'next'
+import React, { useEffect, useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { Layout } from '@/components/Layout'
 
+import { dayOfWeek } from '@/libs/tableData'
+import { daysType } from '@/types/tableTypes'
+
 const CreateRecipe: NextPage = () => {
+  const [tableData, setTableData] = useState<daysType[]>([])
+  useEffect(() => {
+    setTableData(dayOfWeek)
+  }, [])
   const {
     register,
     handleSubmit,
