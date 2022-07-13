@@ -5,20 +5,18 @@ import { Layout } from '@/components/Layout'
 
 import { Table } from '@/components/UI/atom/Table'
 import { useDeleteRecipe } from '@/hooks/useDeleteRecipe'
-import { dayOfWeek } from '@/libs/tableData'
+import { initialDataList, options } from '@/libs/tableData'
 
 const RecipeList: NextPage = () => {
-  const [recipes, setRecipes] = useState([])
-  const [pick, setPick] = useState('')
+  const [recipes, setRecipes] = useState<any>([])
+  const [pickDayId, setPickDayId] = useState<number>(0)
   const [recipeFlag, setRecipeFlag] = useState(false)
 
   const { tableData, setTableData, deleteRecipe } = useDeleteRecipe()
 
   useEffect(() => {
-    setTableData(dayOfWeek)
+    setTableData(initialDataList)
   }, [])
-
-  const options = ['月', '火', '水', '木', '金', '土']
 
   const getTarget = (e: any) => {
     const recipeData = [...recipes]
@@ -27,13 +25,19 @@ const RecipeList: NextPage = () => {
     setRecipeFlag(true)
   }
 
-  const onSubmitList = () => {
+  const onSubmitList = (e: any) => {
     setRecipeFlag(false)
+    const oldData = [...tableData]
+    const newData = { ...oldData[pickDayId - 1], recipe: recipes[0].name }
+    const newDataSet = oldData.map((data) => (data.tableId === Number(pickDayId) ? newData : data))
+    setTableData(newDataSet)
     setRecipes([])
+    setPickDayId(0)
   }
 
   const getRecipe = async (e: any) => {
     e.preventDefault()
+    setRecipeFlag(false)
     const response = await fetch('api/recipe', {
       method: 'GET',
     })
@@ -46,6 +50,7 @@ const RecipeList: NextPage = () => {
       console.log(response.status)
     }
   }
+
   return (
     <div>
       <Layout title='Home'>
@@ -115,14 +120,15 @@ const RecipeList: NextPage = () => {
                     <select
                       className='select mx-10 max-w-xs'
                       onChange={(e: any) => {
-                        setPick(e.target.value)
+                        setPickDayId(e.target.value)
                       }}
+                      defaultValue={0}
                     >
-                      <option disabled selected>
-                        Pick your favorite Simpson
-                      </option>
+                      <option>登録する曜日を選んでください</option>
                       {options.map((option) => (
-                        <option key={option}>{option}</option>
+                        <option value={option.id} key={option.id}>
+                          {option.day}
+                        </option>
                       ))}
                     </select>
                     <button onClick={onSubmitList}>登録</button>

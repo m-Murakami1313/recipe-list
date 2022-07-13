@@ -1,6 +1,6 @@
 export interface daysType {
   day: string
   recipe?: string
-  id: number
+  id: string
   tableId: number
 }
