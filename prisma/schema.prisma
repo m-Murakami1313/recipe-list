@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
@@ -18,16 +18,77 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-  posts         Post[]
 }
 
+model Session {
+  id           String        @id @default(cuid())
+  sessionToken String        @unique
+  userId       String
+  expires      DateTime
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  User_Recipe  User_Recipe[]
+  User_List    User_List[]
+}
 
-model Post {
-  id        String    @id @default(cuid())
-  post      String
-  author    User      @relation(fields: [authorId], references: [id])
-  authorId  String
-  createdAt DateTime? @default(now())
+model User_Recipe {
+  id        String   @id @default(cuid())
+  recipe    Recipe   @relation(fields: [recipeId], references: [id])
+  recipeId  String
+  Session   Session? @relation(fields: [sessionId], references: [id])
+  sessionId String?
+}
+
+model Recipe {
+  id          String        @id @default(cuid())
+  recipeName  String
+  User_Recipe User_Recipe[]
+  Ingredients Ingredients[]
+  Process     Process[]
+  List_Recipe List_Recipe[]
+  createdAt   DateTime?     @default(now())
+  updated_at  DateTime?     @updatedAt
+}
+
+model Ingredients {
+  id              String    @id @default(cuid())
+  ingredientsName String
+  weight          Int
+  recipe          Recipe    @relation(fields: [recipeId], references: [id])
+  recipeId        String
+  createdAt       DateTime? @default(now())
+  updated_at      DateTime? @updatedAt
+}
+
+model Process {
+  id          String    @id @default(cuid())
+  processName String
+  recipe      Recipe    @relation(fields: [recipeId], references: [id])
+  recipeId    String
+  createdAt   DateTime? @default(now())
+  updated_at  DateTime? @updatedAt
+}
+
+model User_List {
+  id        String   @id @default(cuid())
+  list      List     @relation(fields: [listId], references: [id])
+  listId    String
+  Session   Session? @relation(fields: [sessionId], references: [id])
+  sessionId String?
+}
+
+model List {
+  id          String        @id @default(cuid())
+  listName    String
+  User_List   User_List[]
+  List_Recipe List_Recipe[]
+}
+
+model List_Recipe {
+  id       String @id @default(cuid())
+  list     List   @relation(fields: [listId], references: [id])
+  listId   String
+  recipe   Recipe @relation(fields: [recipeId], references: [id])
+  recipeId String
 }
 
 model Account {
@@ -47,14 +108,6 @@ model Account {
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
-}
-
-model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model VerificationToken {
