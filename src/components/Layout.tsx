@@ -14,6 +14,7 @@ export const Layout: React.FC<Title> = ({ children, title }) => {
   const pages = [
     { name: 'レシピ作成', href: 'createRecipe' },
     { name: 'レシピリスト作成', href: 'recipeList' },
+    {name:"レシピ検索",href:"search/searchRecipe"}
   ]
 
   return (
