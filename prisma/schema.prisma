@@ -18,32 +18,24 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  recipe        Recipe[]
+  list          List[]
 }
 
 model Session {
-  id           String        @id @default(cuid())
-  sessionToken String        @unique
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
   userId       String
   expires      DateTime
-  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  User_Recipe  User_Recipe[]
-  User_List    User_List[]
-}
-
-model User_Recipe {
-  id        String   @id @default(cuid())
-  recipe    Recipe   @relation(fields: [recipeId], references: [id])
-  recipeId  String
-  Session   Session? @relation(fields: [sessionId], references: [id])
-  sessionId String?
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Recipe {
   id          String        @id @default(cuid())
   recipeName  String
-  User_Recipe User_Recipe[]
-  Ingredients Ingredients[]
-  Process     Process[]
+  user        User[]
+  ingredients Ingredients[]
+  process     Process[]
   List_Recipe List_Recipe[]
   createdAt   DateTime?     @default(now())
   updated_at  DateTime?     @updatedAt
@@ -52,7 +44,7 @@ model Recipe {
 model Ingredients {
   id              String    @id @default(cuid())
   ingredientsName String
-  weight          Int
+  weight          String
   recipe          Recipe    @relation(fields: [recipeId], references: [id])
   recipeId        String
   createdAt       DateTime? @default(now())
@@ -61,6 +53,7 @@ model Ingredients {
 
 model Process {
   id          String    @id @default(cuid())
+  processNo   Int
   processName String
   recipe      Recipe    @relation(fields: [recipeId], references: [id])
   recipeId    String
@@ -68,18 +61,10 @@ model Process {
   updated_at  DateTime? @updatedAt
 }
 
-model User_List {
-  id        String   @id @default(cuid())
-  list      List     @relation(fields: [listId], references: [id])
-  listId    String
-  Session   Session? @relation(fields: [sessionId], references: [id])
-  sessionId String?
-}
-
 model List {
   id          String        @id @default(cuid())
   listName    String
-  User_List   User_List[]
+  user        User[]
   List_Recipe List_Recipe[]
 }
 
@@ -89,6 +74,7 @@ model List_Recipe {
   listId   String
   recipe   Recipe @relation(fields: [recipeId], references: [id])
   recipeId String
+  tableNo  Int
 }
 
 model Account {
