@@ -6,9 +6,9 @@ export const CreateRecipeNameForm = ({register,handleSubmit}:any) => {
 
 
   return (
-    <div>
+    <div >
       <form onSubmit={handleSubmit(onSubmitRecipeName)}>
-        <label htmlFor='name'>レシピ名</label>
+        <label htmlFor='name' className='text-2xl'>レシピ名</label>
         <input
           id='name'
           type='text'
