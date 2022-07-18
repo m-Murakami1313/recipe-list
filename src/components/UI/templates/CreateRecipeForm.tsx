@@ -10,10 +10,10 @@ export const CreateRecipeForm = () => {
     deleteData,
     handleChangeData,
     submitProcessData,
-
-    onSubmitRecipeName,
     createRecipeDataSet,
     setCreateRecipeDataset,
+    setRecipeName,
+    recipeName,
   } = useCreateRecipe()
 
   useEffect(() => {
@@ -21,15 +21,13 @@ export const CreateRecipeForm = () => {
   }, [])
   return (
     <div>
-      <CreateRecipeNameForm />
+      <CreateRecipeNameForm setRecipeName={setRecipeName} recipeName={recipeName} />
       <CreateRecipeProcessForm
         createRecipeDataSet={createRecipeDataSet}
-        setCreateRecipeDataset={setCreateRecipeDataset}
         addEmpty={addEmpty}
         deleteData={deleteData}
         handleChangeData={handleChangeData}
         submitProcessData={submitProcessData}
-        onSubmitRecipeName={onSubmitRecipeName}
       />
     </div>
   )

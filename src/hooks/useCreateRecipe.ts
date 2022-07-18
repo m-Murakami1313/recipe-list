@@ -3,6 +3,7 @@ import { createRecipeTypes } from '@/types/createRecipeTypes'
 
 export const useCreateRecipe = () => {
   const [createRecipeDataSet, setCreateRecipeDataset] = useState<createRecipeTypes[]>([])
+  const [recipeName, setRecipeName] = useState<string>('')
 
   const addEmpty = () => {
     const newData = [...createRecipeDataSet, { processName: '' }]
@@ -35,9 +36,11 @@ export const useCreateRecipe = () => {
       processName: data.processName,
       processNo: index + 1,
     }))
-    const response = await fetch('api/post', {
+    const recipeDataSet = [recipeName, newDataSet]
+    console.log(recipeDataSet)
+    const response = await fetch('../api/createRecipe', {
       method: 'POST',
-      body: JSON.stringify(newDataSet),
+      body: JSON.stringify(recipeDataSet),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -45,29 +48,36 @@ export const useCreateRecipe = () => {
     const json = await response.json()
     if (response.ok) {
       console.log(response.status)
-      console.log(json)
-    } else {
-      console.log(response.status)
-    }
-  
-  }
-
-  const onSubmitRecipeName = async (data: any) => {
-    const response = await fetch('api/user', {
-      method: 'POST',
-      body: JSON.stringify(data),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-    const json = await response.json()
-    if (response.ok) {
-      console.log(response.status)
-      console.log(json)
     } else {
       console.log(response.status)
     }
   }
 
-  return { addEmpty,deleteData,handleChangeData,submitProcessData, onSubmitRecipeName ,createRecipeDataSet, setCreateRecipeDataset}
+  // const onSubmitRecipeName = async (data: any) => {
+  //   const response = await fetch('api/user', {
+  //     method: 'POST',
+  //     body: JSON.stringify(data),
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   })
+  //   const json = await response.json()
+  //   if (response.ok) {
+  //     console.log(response.status)
+  //     console.log(json)
+  //   } else {
+  //     console.log(response.status)
+  //   }
+  // }
+
+  return {
+    addEmpty,
+    deleteData,
+    handleChangeData,
+    submitProcessData,
+    createRecipeDataSet,
+    setCreateRecipeDataset,
+    recipeName,
+    setRecipeName,
+  }
 }

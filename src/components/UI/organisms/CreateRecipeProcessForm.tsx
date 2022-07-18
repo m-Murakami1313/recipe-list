@@ -1,15 +1,8 @@
-import { useEffect, useState } from 'react'
-
-import { useCreateRecipe } from '@/hooks/useCreateRecipe'
-import { initialDataSet } from '@/libs/createRecipeData'
-
 export const CreateRecipeProcessForm = ({
   addEmpty,
   deleteData,
   handleChangeData,
   submitProcessData,
-  onSubmitRecipeName,
-  setCreateRecipeDataset,
   createRecipeDataSet,
 }: any) => {
   console.log(createRecipeDataSet)
