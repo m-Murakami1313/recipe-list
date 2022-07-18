@@ -11,7 +11,7 @@ export const useRecipeList = () => {
   const getRecipe = async (e: any) => {
     e.preventDefault()
     setRecipeFlag(false)
-    const response = await fetch('api/recipe', {
+    const response = await fetch('../api/recipe', {
       method: 'GET',
     })
     const json = await response.json()
@@ -32,6 +32,7 @@ export const useRecipeList = () => {
   }
 
   const onSubmitList = (e: any) => {
+    e.preventDefault()
     setRecipeFlag(false)
     const oldData = [...tableData]
     const newData = { ...oldData[pickDayId - 1], recipe: recipes[0].name }
@@ -48,5 +49,15 @@ export const useRecipeList = () => {
     setTableData(newDatas)
   }
 
-  return { getRecipe, getTarget, onSubmitList, deleteRecipe, tableData, setTableData,recipes,recipeFlag,setPickDayId }
+  return {
+    getRecipe,
+    getTarget,
+    onSubmitList,
+    deleteRecipe,
+    tableData,
+    setTableData,
+    recipes,
+    recipeFlag,
+    setPickDayId,
+  }
 }
