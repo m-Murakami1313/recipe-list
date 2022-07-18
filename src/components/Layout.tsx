@@ -12,9 +12,10 @@ export const Layout: React.FC<Title> = ({ children, title }) => {
   const loading = status === 'loading'
 
   const pages = [
-    { name: 'レシピ作成', href: 'createRecipe' },
-    { name: 'レシピリスト作成', href: 'recipeList' },
-    {name:"レシピ検索",href:"search/searchRecipe"}
+    { name: 'レシピ作成', href: 'recipes/createRecipe' },
+    { name: 'レシピリスト作成', href: 'recipes/recipeList' },
+    { name: 'レシピ検索', href: 'search/searchRecipe' },
+    { name: 'レシピリスト検索', href: 'search/searchRecipeList' },
   ]
 
   return (
