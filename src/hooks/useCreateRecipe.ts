@@ -1,7 +1,56 @@
-import { useForm } from 'react-hook-form'
+import { useState } from 'react'
+import { createRecipeTypes } from '@/types/createRecipeTypes'
 
 export const useCreateRecipe = () => {
-  const { reset } = useForm()
+  const [createRecipeDataSet, setCreateRecipeDataset] = useState<createRecipeTypes[]>([])
+
+  const addEmpty = () => {
+    const newData = [...createRecipeDataSet, { processName: '' }]
+    setCreateRecipeDataset(newData)
+  }
+
+  const deleteData = (e: any) => {
+    e.preventDefault()
+    const targetId = Number(e.target.id)
+    const oldData = [...createRecipeDataSet]
+    const newData = oldData.filter((data, index) => index !== targetId)
+
+    setCreateRecipeDataset(newData)
+  }
+
+  const handleChangeData = (e: any) => {
+    e.preventDefault()
+    const targetValue = e.target.value
+    const targetId = Number(e.target.id)
+    const oldData = [...createRecipeDataSet]
+    const newData = { ...oldData[targetId], processName: targetValue }
+    const newDataSet = oldData.map((data, index) => (index === targetId ? newData : data))
+    setCreateRecipeDataset(newDataSet)
+  }
+
+  const submitProcessData = async (e: any) => {
+    e.preventDefault()
+    const oldData = [...createRecipeDataSet]
+    const newDataSet = oldData.map((data, index) => ({
+      processName: data.processName,
+      processNo: index + 1,
+    }))
+    const response = await fetch('api/post', {
+      method: 'POST',
+      body: JSON.stringify(newDataSet),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    const json = await response.json()
+    if (response.ok) {
+      console.log(response.status)
+      console.log(json)
+    } else {
+      console.log(response.status)
+    }
+  
+  }
 
   const onSubmitRecipeName = async (data: any) => {
     const response = await fetch('api/user', {
@@ -15,31 +64,10 @@ export const useCreateRecipe = () => {
     if (response.ok) {
       console.log(response.status)
       console.log(json)
-      reset()
     } else {
       console.log(response.status)
     }
   }
 
-  const onSubmitPost = async (data: any) => {
-    const submitData = { authorId: data.authorId, post: data.post }
-    console.log(JSON.stringify(submitData))
-    const response = await fetch('api/post', {
-      method: 'POST',
-      body: JSON.stringify(submitData),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-    const json = await response.json()
-    if (response.ok) {
-      console.log(response.status)
-      console.log(json)
-      reset()
-    } else {
-      console.log(response.status)
-    }
-  }
-
-  return { onSubmitPost, onSubmitRecipeName }
+  return { addEmpty,deleteData,handleChangeData,submitProcessData, onSubmitRecipeName ,createRecipeDataSet, setCreateRecipeDataset}
 }
