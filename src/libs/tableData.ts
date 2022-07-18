@@ -1,13 +1,13 @@
 import { daysType } from '@/types/tableTypes'
 
 export const initialDataList: daysType[] = [
-  { day: '月', recipe: 'レシピ１', tableId: 1, id: '' },
-  { day: '火', recipe: 'レシピ２', tableId: 2, id: '' },
-  { day: '水', recipe: 'レシピ３', tableId: 3, id: '' },
-  { day: '木', recipe: 'レシピ４', tableId: 4, id: '' },
-  { day: '金', recipe: 'レシピ５', tableId: 5, id: '' },
-  { day: '土', recipe: 'レシピ６', tableId: 6, id: '' },
-  { day: '日', recipe: 'レシピ７', tableId: 7, id: '' },
+  { day: '月', recipe: 'レシピ１', tableNo: 1, id: '' },
+  { day: '火', recipe: 'レシピ２', tableNo: 2, id: '' },
+  { day: '水', recipe: 'レシピ３', tableNo: 3, id: '' },
+  { day: '木', recipe: 'レシピ４', tableNo: 4, id: '' },
+  { day: '金', recipe: 'レシピ５', tableNo: 5, id: '' },
+  { day: '土', recipe: 'レシピ６', tableNo: 6, id: '' },
+  { day: '日', recipe: 'レシピ７', tableNo: 7, id: '' },
 ]
 
 export const TABLE_DEFINE = [
