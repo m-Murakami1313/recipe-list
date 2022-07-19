@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 
+import { Input } from '../atom/Input'
 import { SearchResult } from '../organisms/SearchResult'
 import { SearchForm } from '@/components/UI/organisms/SearchForm'
 import { Table } from '@/components/UI/organisms/Table'
@@ -17,16 +18,34 @@ export const CreateRecipeList = () => {
     recipes,
     recipeFlag,
     setPickDayId,
+    submitRecipeList,
+    recipeListName,
+    setRecipeListName,
   } = useRecipeList()
 
   useEffect(() => {
     setTableData(initialDataList)
   }, [])
+
+  const placeholder = 'リストの名前を記入'
+  console.log(recipeListName)
   return (
     <div>
-      <div className='flex items-center justify-center'>
-        <Table tableData={tableData} deleteRecipe={deleteRecipe} />
-      </div>
+      <form onSubmit={submitRecipeList}>
+        <div className='mt-10 flex items-center justify-center'>
+          <Table tableData={tableData} deleteRecipe={deleteRecipe} />
+        </div>
+        <div className='mt-10 flex items-center justify-center'>
+          <Input
+            textValue={recipeListName}
+            handleOnChange={setRecipeListName}
+            placeholder={placeholder}
+          />
+          <button type='submit' className='btn btn-ghost ml-7  bg-yellow-400 p-2'>
+            レシピリストを登録
+          </button>
+        </div>
+      </form>
       <div className='flex items-center justify-center'>
         <div>
           <div className='mt-10'>

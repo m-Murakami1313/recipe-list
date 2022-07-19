@@ -1,4 +1,4 @@
-import { useSession } from "next-auth/react"
+import { useSession } from 'next-auth/react'
 import { useState } from 'react'
 
 import { daysType } from '@/types/tableTypes'
@@ -8,11 +8,12 @@ export const useRecipeList = () => {
   const [pickDayId, setPickDayId] = useState<number>(0)
   const [recipeFlag, setRecipeFlag] = useState(false)
   const [tableData, setTableData] = useState<daysType[]>([])
+  const [recipeListName, setRecipeListName] = useState('')
 
-  const { data: session} = useSession()
-  
+  const { data: session } = useSession()
+
   const userId = session?.user.id
-console.log(userId)
+  console.log(userId)
 
   const getRecipe = async (e: any) => {
     e.preventDefault()
@@ -60,8 +61,8 @@ console.log(userId)
     setRecipeFlag(false)
     const newData = [...tableData]
     const list = newData.map((data) => ({ tableNo: data.tableNo, id: data.id }))
-    const formData = [list,{userId:userId},{listName:"listName"}]
-    const response = await fetch('../api/createRecipeList', {
+    const formData = [list, { userId: userId }, { listName: recipeListName }]
+    const response = await fetch('../api/createRecipeListAPI', {
       method: 'POST',
       body: JSON.stringify(formData),
       headers: {
@@ -75,7 +76,6 @@ console.log(userId)
     }
   }
 
-
   return {
     getRecipe,
     getTarget,
@@ -87,6 +87,8 @@ console.log(userId)
     recipeFlag,
     setPickDayId,
     setRecipeFlag,
-    submitRecipeList
+    submitRecipeList,
+    recipeListName,
+    setRecipeListName,
   }
 }
