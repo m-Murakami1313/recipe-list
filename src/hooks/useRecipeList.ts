@@ -9,17 +9,21 @@ export const useRecipeList = () => {
   const [recipeFlag, setRecipeFlag] = useState(false)
   const [tableData, setTableData] = useState<daysType[]>([])
   const [recipeListName, setRecipeListName] = useState('')
+  const [searchValue, setSearchValue] = useState('')
 
   const { data: session } = useSession()
 
   const userId = session?.user.id
-  console.log(userId)
 
   const getRecipe = async (e: any) => {
     e.preventDefault()
     setRecipeFlag(false)
-    const response = await fetch('../api/recipe', {
-      method: 'GET',
+    const response = await fetch('../api/searchRecipeDataAPI', {
+      method: 'POST',
+      body: JSON.stringify(searchValue),
+      headers: {
+        'Content-Type': 'application/json',
+      },
     })
     const json = await response.json()
     if (response.ok) {
@@ -42,7 +46,7 @@ export const useRecipeList = () => {
     e.preventDefault()
     setRecipeFlag(false)
     const oldData = [...tableData]
-    const newData = { ...oldData[pickDayId - 1], recipe: recipes[0].name }
+    const newData = { ...oldData[pickDayId - 1], recipe: recipes[0].recipeName }
     const newDataSet = oldData.map((data) => (data.tableNo === Number(pickDayId) ? newData : data))
     setTableData(newDataSet)
     setRecipes([])
@@ -90,5 +94,7 @@ export const useRecipeList = () => {
     submitRecipeList,
     recipeListName,
     setRecipeListName,
+    searchValue,
+    setSearchValue,
   }
 }

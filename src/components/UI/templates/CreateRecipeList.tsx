@@ -21,6 +21,8 @@ export const CreateRecipeList = () => {
     submitRecipeList,
     recipeListName,
     setRecipeListName,
+    searchValue,
+    setSearchValue,
   } = useRecipeList()
 
   useEffect(() => {
@@ -28,7 +30,6 @@ export const CreateRecipeList = () => {
   }, [])
 
   const placeholder = 'リストの名前を記入'
-  console.log(recipeListName)
   return (
     <div>
       <form onSubmit={submitRecipeList}>
@@ -49,7 +50,11 @@ export const CreateRecipeList = () => {
       <div className='flex items-center justify-center'>
         <div>
           <div className='mt-10'>
-            <SearchForm getData={getRecipe} />
+            <SearchForm
+              getData={getRecipe}
+              searchValue={searchValue}
+              setSearchValue={setSearchValue}
+            />
           </div>
         </div>
       </div>
