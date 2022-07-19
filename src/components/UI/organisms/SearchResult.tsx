@@ -15,9 +15,9 @@ export const SearchResult = ({
       <ul>
         {recipes.map((recipe: any, index: number) => (
           <div key={recipe.id} className='flex items-center py-4'>
-            <Link href='/'>
+            <Link href={`../../page/recipes/${recipe.id}`}>
               <a>
-                <li className='hover:text-blue-800 hover:underline'>{recipe.name}</li>
+                <li className='hover:text-blue-800 hover:underline'>{recipe.recipeName}</li>
               </a>
             </Link>
             <button className='pl-7' onClick={getTarget} id={index.toString()}>
