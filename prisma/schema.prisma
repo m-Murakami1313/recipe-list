@@ -91,6 +91,7 @@ model List_Recipe {
   recipe   Recipe @relation(fields: [recipeId], references: [id])
   recipeId String
   tableNo  Int
+  dayOfWeek String
 }
 
 model Account {
