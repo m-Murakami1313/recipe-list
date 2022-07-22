@@ -46,7 +46,7 @@ export const useRecipeList = () => {
     e.preventDefault()
     setRecipeFlag(false)
     const oldData = [...tableData]
-    const newData = { ...oldData[pickDayId - 1], recipe: recipes[0].recipeName }
+    const newData = { ...oldData[pickDayId - 1], recipe: recipes[0].recipeName, id: recipes[0].id }
     const newDataSet = oldData.map((data) => (data.tableNo === Number(pickDayId) ? newData : data))
     setTableData(newDataSet)
     setRecipes([])
@@ -54,6 +54,7 @@ export const useRecipeList = () => {
   }
 
   const deleteRecipe = (e: any) => {
+    e.preventDefault()
     const oldData = [...tableData]
     const newData = { ...oldData[e.target.id], recipe: '' }
     const newDatas = oldData.map((data, index) => (index === Number(e.target.id) ? newData : data))
@@ -66,6 +67,7 @@ export const useRecipeList = () => {
     const newData = [...tableData]
     const list = newData.map((data) => ({ tableNo: data.tableNo, id: data.id }))
     const formData = [list, { userId: userId }, { listName: recipeListName }]
+    console.log(list)
     const response = await fetch('../api/createRecipeListAPI', {
       method: 'POST',
       body: JSON.stringify(formData),
