@@ -18,7 +18,7 @@ export const useRecipeList = () => {
   const getRecipe = async (e: any) => {
     e.preventDefault()
     setRecipeFlag(false)
-    const response = await fetch('../api/searchRecipeDataAPI', {
+    const response = await fetch('../../api/searchRecipeDataAPI', {
       method: 'POST',
       body: JSON.stringify(searchValue),
       headers: {
@@ -68,7 +68,7 @@ export const useRecipeList = () => {
     const list = newData.map((data) => ({ tableNo: data.tableNo, id: data.id }))
     const formData = [list, { userId: userId }, { listName: recipeListName }]
     console.log(list)
-    const response = await fetch('../api/createRecipeListAPI', {
+    const response = await fetch('../../api/createRecipeListAPI', {
       method: 'POST',
       body: JSON.stringify(formData),
       headers: {
