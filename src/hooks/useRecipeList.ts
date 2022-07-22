@@ -65,9 +65,13 @@ export const useRecipeList = () => {
     e.preventDefault()
     setRecipeFlag(false)
     const newData = [...tableData]
-    const list = newData.map((data) => ({ tableNo: data.tableNo, id: data.id }))
+    const list = newData.map((data) => ({
+      tableNo: data.tableNo,
+      recipeId: data.id,
+      dayOfWeek: data.day,
+    }))
     const formData = [list, { userId: userId }, { listName: recipeListName }]
-    console.log(list)
+    console.log(formData)
     const response = await fetch('../../api/createRecipeListAPI', {
       method: 'POST',
       body: JSON.stringify(formData),
@@ -79,6 +83,7 @@ export const useRecipeList = () => {
       console.log(response.status)
     } else {
       console.log(response.status)
+      console.log(response)
     }
   }
 
