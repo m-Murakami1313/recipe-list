@@ -1,9 +1,13 @@
 import { useState } from 'react'
-import { createRecipeTypes } from '@/types/createRecipeTypes'
+import { createRecipeTypes, createIngredientsTypes } from '@/types/createRecipeTypes'
 
 export const useCreateRecipe = () => {
   const [createRecipeDataSet, setCreateRecipeDataset] = useState<createRecipeTypes[]>([])
+  const [createIngredientsDataSet, setCreateIngredientsDataSet] = useState<
+    createIngredientsTypes[]
+  >([])
   const [recipeName, setRecipeName] = useState<string>('')
+  const [url, setUrl] = useState('')
 
   const addEmpty = () => {
     const newData = [...createRecipeDataSet, { processName: '' }]
@@ -15,7 +19,6 @@ export const useCreateRecipe = () => {
     const targetId = Number(e.target.id)
     const oldData = [...createRecipeDataSet]
     const newData = oldData.filter((data, index) => index !== targetId)
-
     setCreateRecipeDataset(newData)
   }
 
@@ -36,7 +39,7 @@ export const useCreateRecipe = () => {
       processName: data.processName,
       processNo: index + 1,
     }))
-    const recipeDataSet = [recipeName, newDataSet]
+    const recipeDataSet = [recipeName, newDataSet, createIngredientsDataSet,url]
     console.log(recipeDataSet)
     const response = await fetch('../api/createRecipe', {
       method: 'POST',
@@ -45,30 +48,43 @@ export const useCreateRecipe = () => {
         'Content-Type': 'application/json',
       },
     })
-    const json = await response.json()
     if (response.ok) {
       console.log(response.status)
     } else {
       console.log(response.status)
     }
   }
+  const deleteIngredientsData = (e: any) => {
+    e.preventDefault()
+    const targetId = Number(e.target.id)
+    const oldData = [...createIngredientsDataSet]
+    const newData = oldData.filter((data, index) => index !== targetId)
+    setCreateIngredientsDataSet(newData)
+  }
 
-  // const onSubmitRecipeName = async (data: any) => {
-  //   const response = await fetch('api/user', {
-  //     method: 'POST',
-  //     body: JSON.stringify(data),
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //   })
-  //   const json = await response.json()
-  //   if (response.ok) {
-  //     console.log(response.status)
-  //     console.log(json)
-  //   } else {
-  //     console.log(response.status)
-  //   }
-  // }
+  const handleChangeIngredientsName = (e: any) => {
+    e.preventDefault()
+    const targetValue = e.target.value
+    const targetId = Number(e.target.id)
+    const oldData = [...createIngredientsDataSet]
+    const newData = { ...oldData[targetId], ingredientsName: targetValue }
+    const newDataSet = oldData.map((data, index) => (index === targetId ? newData : data))
+    setCreateIngredientsDataSet(newDataSet)
+  }
+
+  const handleChangeIngredientsWeight = (e: any) => {
+    e.preventDefault()
+    const targetValue = e.target.value
+    const targetId = Number(e.target.id)
+    const oldData = [...createIngredientsDataSet]
+    const newData = { ...oldData[targetId], weight: targetValue }
+    const newDataSet = oldData.map((data, index) => (index === targetId ? newData : data))
+    setCreateIngredientsDataSet(newDataSet)
+  }
+  const addEmptyIngredients = () => {
+    const newData = [...createIngredientsDataSet, { ingredientsName: '', weight: '' }]
+    setCreateIngredientsDataSet(newData)
+  }
 
   return {
     addEmpty,
@@ -79,5 +95,12 @@ export const useCreateRecipe = () => {
     setCreateRecipeDataset,
     recipeName,
     setRecipeName,
+    deleteIngredientsData,
+    handleChangeIngredientsName,
+    handleChangeIngredientsWeight,
+    createIngredientsDataSet,
+    setCreateIngredientsDataSet,
+    addEmptyIngredients,
+    url,setUrl
   }
 }

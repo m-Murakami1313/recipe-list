@@ -1,7 +1,6 @@
-import { PrismaClient } from '@prisma/client'
 import { GetStaticPaths, GetStaticProps } from 'next'
-import Link from 'next/link'
 import prisma from '../../libs/prisma'
+
 import { Layout } from '@/components/Layout'
 import { RecipePage } from '@/components/UI/templates/RecipePage'
 
@@ -23,6 +22,7 @@ export const getStaticProps: GetStaticProps = async ({ params }: any) => {
     select: {
       recipeName: true,
       id: true,
+      url: true,
       process: {
         select: {
           processNo: true,
@@ -49,12 +49,17 @@ export const getStaticProps: GetStaticProps = async ({ params }: any) => {
 }
 
 export default function User({ data }: any) {
-  const { recipeName, id, process, ingredients } = data
+  const { recipeName, id, process, ingredients, url } = data
   return (
     <Layout title='recipe'>
       <div className='md:ml-20'>
         <div className='mt-10'>
-          <RecipePage recipeName={recipeName} process={process} ingredients={ingredients} />
+          <RecipePage
+            recipeName={recipeName}
+            process={process}
+            ingredients={ingredients}
+            url={url}
+          />
         </div>
       </div>
     </Layout>

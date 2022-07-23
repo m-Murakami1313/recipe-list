@@ -6,6 +6,12 @@ const handler: NextApiHandler = async (req, res) => {
     const createRecipe = await prisma.recipe.create({
       data: {
         recipeName: req.body[0],
+        url: req.body[3],
+        ingredients: {
+          createMany: {
+            data: [...req.body[2]],
+          },
+        },
         process: {
           createMany: {
             data: [...req.body[1]],
@@ -14,6 +20,7 @@ const handler: NextApiHandler = async (req, res) => {
       },
       include: {
         process: true,
+        ingredients: true,
       },
     })
     res.status(200).json(createRecipe)
