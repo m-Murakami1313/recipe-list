@@ -85,13 +85,12 @@ model User_List {
 }
 
 model List_Recipe {
-  id        String @id @default(cuid())
-  list      List   @relation(fields: [listId], references: [id])
-  listId    String
-  recipe    Recipe @relation(fields: [recipeId], references: [id])
-  recipeId  String
-  tableNo   Int
-  dayOfWeek String
+  id       String @id @default(cuid())
+  list     List   @relation(fields: [listId], references: [id])
+  listId   String
+  recipe   Recipe @relation(fields: [recipeId], references: [id])
+  recipeId String
+  tableNo  Int
 }
 
 model Account {

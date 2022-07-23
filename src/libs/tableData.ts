@@ -16,11 +16,6 @@ export const TABLE_DEFINE = [
   { label: 'テーブルから削除', key: 'deleate' },
 ]
 
-export const TABLE_DEFINE_List = [
-  { label: '曜日', key: 'dayOfWeek' },
-  { label: 'レシピ名', key: 'recipeName' }
-]
-
 export const options = [
   { day: '月', id: 1 },
   { day: '火', id: 2 },
