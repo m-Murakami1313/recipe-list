@@ -18,7 +18,7 @@ export const useRecipeList = () => {
   const getRecipe = async (e: any) => {
     e.preventDefault()
     setRecipeFlag(false)
-    const response = await fetch('../api/searchRecipeDataAPI', {
+    const response = await fetch('../../api/searchRecipeDataAPI', {
       method: 'POST',
       body: JSON.stringify(searchValue),
       headers: {
@@ -46,7 +46,7 @@ export const useRecipeList = () => {
     e.preventDefault()
     setRecipeFlag(false)
     const oldData = [...tableData]
-    const newData = { ...oldData[pickDayId - 1], recipe: recipes[0].recipeName }
+    const newData = { ...oldData[pickDayId - 1], recipe: recipes[0].recipeName, id: recipes[0].id }
     const newDataSet = oldData.map((data) => (data.tableNo === Number(pickDayId) ? newData : data))
     setTableData(newDataSet)
     setRecipes([])
@@ -54,6 +54,7 @@ export const useRecipeList = () => {
   }
 
   const deleteRecipe = (e: any) => {
+    e.preventDefault()
     const oldData = [...tableData]
     const newData = { ...oldData[e.target.id], recipe: '' }
     const newDatas = oldData.map((data, index) => (index === Number(e.target.id) ? newData : data))
@@ -64,9 +65,14 @@ export const useRecipeList = () => {
     e.preventDefault()
     setRecipeFlag(false)
     const newData = [...tableData]
-    const list = newData.map((data) => ({ tableNo: data.tableNo, id: data.id }))
+    const list = newData.map((data) => ({
+      tableNo: data.tableNo,
+      recipeId: data.id,
+      dayOfWeek: data.day,
+    }))
     const formData = [list, { userId: userId }, { listName: recipeListName }]
-    const response = await fetch('../api/createRecipeListAPI', {
+    console.log(formData)
+    const response = await fetch('../../api/createRecipeListAPI', {
       method: 'POST',
       body: JSON.stringify(formData),
       headers: {
@@ -77,6 +83,7 @@ export const useRecipeList = () => {
       console.log(response.status)
     } else {
       console.log(response.status)
+      console.log(response)
     }
   }
 

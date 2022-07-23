@@ -9,7 +9,7 @@ const handler: NextApiHandler = async (req, res) => {
         list_recipe: {
           create: [
             {
-              ...req.body[0],
+             ...req.body[0][0]
             },
           ],
         },
@@ -25,9 +25,10 @@ const handler: NextApiHandler = async (req, res) => {
       },
     })
     res.status(200).json(recipeList)
-  } catch (error) {
-    console.log(req.body)
-    res.status(500).json(error)
+  } catch (recipeList) {
+    console.log(...req.body[0])
+    res.status(500).json(recipeList)
+    console.log(recipeList)
   }
 }
 export default handler

@@ -7,7 +7,7 @@ import { Table } from '@/components/UI/organisms/Table'
 import { useRecipeList } from '@/hooks/useRecipeList'
 import { initialDataList, options } from '@/libs/tableData'
 
-export const CreateRecipeList = () => {
+export const CreateRecipeListPage = () => {
   const {
     getRecipe,
     getTarget,
