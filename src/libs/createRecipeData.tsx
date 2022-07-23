@@ -1,4 +1,4 @@
-import { createRecipeTypes } from '@/types/createRecipeTypes'
+import { createIngredientsTypes, createRecipeTypes } from '@/types/createRecipeTypes'
 
 export const initialDataSet: createRecipeTypes[] = [
   { processName: '' },
@@ -7,4 +7,18 @@ export const initialDataSet: createRecipeTypes[] = [
   { processName: '' },
   { processName: '' },
   { processName: '' },
+]
+export const initialDataIngredients: createIngredientsTypes[] = [
+  {
+    ingredientsName: '',
+    weight: '',
+  },
+  {
+    ingredientsName: '',
+    weight: '',
+  },
+  {
+    ingredientsName: '',
+    weight: '',
+  },
 ]

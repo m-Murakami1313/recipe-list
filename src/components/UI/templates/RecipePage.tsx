@@ -1,17 +1,19 @@
-import Link from 'next/link'
 import React from 'react'
 
 import { RecipeProcessTable } from '../organisms/RecipeProcessTable'
 import { RecipeTable } from '../organisms/RecipeTable'
 
-export const RecipePage = ({ recipeName, ingredients, process }: any) => {
+export const RecipePage = ({ recipeName, ingredients, process, url }: any) => {
   const tableHeadIngredients = ['使用原材料・調味料', '重さ']
   const tableHeadProcess = ['工程番号', '工程']
   return (
     <div>
-      <div className='mb-10 flex items-end'>
+      <div className='mb-10 lg:flex lg:items-end'>
         <h1 className='text-2xl'>レシピ名:{recipeName}</h1>
-        <h2 className='ml-20'>参考URL:</h2>
+        <h2 className='mt-5 lg:ml-20'>参考URL</h2>
+        <a href={`${url}`} target='_blank' rel='noopener noreferrer'>
+          <h3 className='hover:text-blue-800 hover:underline lg:ml-20'>{url}</h3>
+        </a>
       </div>
       <div className='mb-10'>
         <RecipeTable tableData={ingredients} tableHead={tableHeadIngredients} />
