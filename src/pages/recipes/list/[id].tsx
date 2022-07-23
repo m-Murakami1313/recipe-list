@@ -1,9 +1,11 @@
 import { PrismaClient } from '@prisma/client'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 import prisma from '../../../libs/prisma'
 import { Layout } from '@/components/Layout'
 import { RecipeListPage } from '@/components/UI/templates/RecipeListPage'
+import { initialDataList } from '@/libs/tableData'
 
 // const prisma = new PrismaClient()
 
@@ -23,6 +25,18 @@ export const getStaticProps: GetStaticProps = async ({ params }: any) => {
     select: {
       listName: true,
       id: true,
+      list_recipe: {
+        select: {
+          recipeId: true,
+          tableNo: true,
+          dayOfWeek:true,
+          recipe: {
+            select: {
+              recipeName: true,
+            },
+          },
+        },
+      },
     },
   })
   return {
@@ -35,12 +49,12 @@ export const getStaticProps: GetStaticProps = async ({ params }: any) => {
 }
 
 export default function User({ data }: any) {
-  const { listName, id } = data
+
   return (
     <Layout title='recipe'>
       <div className='md:ml-20'>
         <div className='mt-10'>
-          <RecipeListPage listName={listName} id={id}/>
+          <RecipeListPage data={data}/>
         </div>
       </div>
     </Layout>
