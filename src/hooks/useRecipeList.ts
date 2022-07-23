@@ -10,6 +10,7 @@ export const useRecipeList = () => {
   const [tableData, setTableData] = useState<daysType[]>([])
   const [recipeListName, setRecipeListName] = useState('')
   const [searchValue, setSearchValue] = useState('')
+  const [list,setList] =useState([])
 
   const { data: session } = useSession()
 
@@ -87,6 +88,25 @@ export const useRecipeList = () => {
     }
   }
 
+  const getRecipeList = async (e: any) => {
+    e.preventDefault()
+    const response = await fetch('../../api/searchRecipeListAPI', {
+      method: 'POST',
+      body: JSON.stringify(searchValue),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+    const json = await response.json()
+    if (response.ok) {
+      console.log(response.status)
+      console.log(json)
+      setList(json)
+    } else {
+      console.log(response.status)
+    }
+  }
+
   return {
     getRecipe,
     getTarget,
@@ -103,5 +123,7 @@ export const useRecipeList = () => {
     setRecipeListName,
     searchValue,
     setSearchValue,
+    getRecipeList,
+    list
   }
 }
