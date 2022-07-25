@@ -21,7 +21,7 @@ export const useRecipeList = () => {
     setRecipeFlag(false)
     const response = await fetch('../../api/searchRecipeDataAPI', {
       method: 'POST',
-      body: JSON.stringify(searchValue),
+      body: JSON.stringify([searchValue,userId]),
       headers: {
         'Content-Type': 'application/json',
       },
