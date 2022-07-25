@@ -17,10 +17,16 @@ const handler: NextApiHandler = async (req, res) => {
             data: [...req.body[1]],
           },
         },
+        user_recipe: {
+          create: {
+            userId: req.body[4],
+          },
+        },
       },
       include: {
         process: true,
         ingredients: true,
+        user_recipe: true,
       },
     })
     res.status(200).json(createRecipe)

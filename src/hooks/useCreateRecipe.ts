@@ -1,3 +1,4 @@
+import { useSession } from 'next-auth/react'
 import { useState } from 'react'
 import { createRecipeTypes, createIngredientsTypes } from '@/types/createRecipeTypes'
 
@@ -8,6 +9,8 @@ export const useCreateRecipe = () => {
   >([])
   const [recipeName, setRecipeName] = useState<string>('')
   const [url, setUrl] = useState('')
+
+  const { data: session } = useSession()
 
   const addEmpty = () => {
     const newData = [...createRecipeDataSet, { processName: '' }]
@@ -39,7 +42,7 @@ export const useCreateRecipe = () => {
       processName: data.processName,
       processNo: index + 1,
     }))
-    const recipeDataSet = [recipeName, newDataSet, createIngredientsDataSet,url]
+    const recipeDataSet = [recipeName, newDataSet, createIngredientsDataSet,url,session?.user.id]
     console.log(recipeDataSet)
     const response = await fetch('../api/createRecipe', {
       method: 'POST',
