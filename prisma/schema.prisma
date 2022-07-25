@@ -44,8 +44,8 @@ model Recipe {
   url         String?
   ingredients Ingredients[]
   process     Process[]
-  List_Recipe List_Recipe[]
-  User_Recipe User_Recipe[]
+  list_recipe List_Recipe[]
+  user_recipe User_Recipe[]
   createdAt   DateTime?     @default(now())
   updated_at  DateTime?     @updatedAt
 }
