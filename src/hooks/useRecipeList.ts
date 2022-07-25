@@ -10,7 +10,7 @@ export const useRecipeList = () => {
   const [tableData, setTableData] = useState<daysType[]>([])
   const [recipeListName, setRecipeListName] = useState('')
   const [searchValue, setSearchValue] = useState('')
-  const [list,setList] =useState([])
+  const [list, setList] = useState([])
 
   const { data: session } = useSession()
 
@@ -21,7 +21,7 @@ export const useRecipeList = () => {
     setRecipeFlag(false)
     const response = await fetch('../../api/searchRecipeDataAPI', {
       method: 'POST',
-      body: JSON.stringify([searchValue,userId]),
+      body: JSON.stringify([searchValue, userId]),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -92,7 +92,7 @@ export const useRecipeList = () => {
     e.preventDefault()
     const response = await fetch('../../api/searchRecipeListAPI', {
       method: 'POST',
-      body: JSON.stringify(searchValue),
+      body: JSON.stringify([searchValue, userId]),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -124,6 +124,6 @@ export const useRecipeList = () => {
     searchValue,
     setSearchValue,
     getRecipeList,
-    list
+    list,
   }
 }
