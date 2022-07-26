@@ -1,13 +1,12 @@
-import { PrismaClient } from '@prisma/client'
 import { GetStaticPaths, GetStaticProps } from 'next'
-import Link from 'next/link'
-import { useEffect, useState } from 'react'
+import { useSession } from 'next-auth/react'
+import { useRouter } from "next/router";
 import prisma from '../../../libs/prisma'
+
 import { Layout } from '@/components/Layout'
 import { RecipeListPage } from '@/components/UI/templates/RecipeListPage'
-import { initialDataList } from '@/libs/tableData'
+import Home from '@/pages';
 
-// const prisma = new PrismaClient()
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const listData = await prisma.list.findMany()
@@ -19,7 +18,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }: any) => {
-  // params.id (現在のページのID) から データを取得.
+
   const data = await prisma.list.findUnique({
     where: { id: params.id },
     select: {
@@ -49,6 +48,18 @@ export const getStaticProps: GetStaticProps = async ({ params }: any) => {
 }
 
 export default function User({ data }: any) {
+  const router = useRouter();
+  const { status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      router.push('/')
+      alert('ログインしてください')
+    },
+  })
+
+  if (status === 'loading') {
+    return <Home />
+  }
 
   return (
     <Layout title='recipe'>
