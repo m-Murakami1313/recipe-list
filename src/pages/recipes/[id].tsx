@@ -1,10 +1,11 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
+import Home from '..'
 import prisma from '../../libs/prisma'
 
 import { Layout } from '@/components/Layout'
 import { RecipePage } from '@/components/UI/templates/RecipePage'
-
-// const prisma = new PrismaClient()
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const recipes = await prisma.recipe.findMany()
@@ -16,7 +17,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }: any) => {
-  // params.id (現在のページのID) から データを取得.
   const data = await prisma.recipe.findUnique({
     where: { id: params.id },
     select: {
@@ -49,7 +49,19 @@ export const getStaticProps: GetStaticProps = async ({ params }: any) => {
 }
 
 export default function User({ data }: any) {
+  const router = useRouter()
   const { recipeName, id, process, ingredients, url } = data
+  const { status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      router.push('/')
+      alert('ログインしてください')
+    },
+  })
+
+  if (status === 'loading') {
+    return <Home />
+  }
   return (
     <Layout title='recipe'>
       <div className='md:ml-20'>

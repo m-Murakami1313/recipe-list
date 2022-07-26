@@ -5,8 +5,15 @@ const handler: NextApiHandler = async (req, res) => {
   try {
     const list = await prisma.list.findMany({
       where: {
-        listName: {
-          contains: req.body,
+        AND: {
+          user_list: {
+            every: {
+              userId: req.body[1],
+            },
+          },
+          listName: {
+            contains: req.body[0],
+          },
         },
       },
     })
