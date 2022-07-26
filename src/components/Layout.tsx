@@ -8,8 +8,7 @@ interface Title {
 }
 
 export const Layout: React.FC<Title> = ({ children, title }) => {
-  const { data: session, status } = useSession()
-  const loading = status === 'loading'
+  const { data: session } = useSession()
 
   const pages = [
     { name: 'レシピ作成', href: 'recipes/createRecipe' },
@@ -54,7 +53,12 @@ export const Layout: React.FC<Title> = ({ children, title }) => {
                           サインイン・新規登録
                         </button>
                       ) : (
-                        <button className='btn btn-ghost font-normal' onClick={() => signOut()}>
+                        <button
+                          className='btn btn-ghost font-normal'
+                          onClick={() => {
+                            signOut({ callbackUrl: `http://localhost/3000` })
+                          }}
+                        >
                           サインアウト
                         </button>
                       )}
