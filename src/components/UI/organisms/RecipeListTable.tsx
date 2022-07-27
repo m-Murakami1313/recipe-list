@@ -29,7 +29,7 @@ export const RecipeListTable = ({ tableData }: any) => {
         <tbody className='text-sm md:text-lg'>
           {tableData &&
             tableData.map((data: any) => (
-              <tr key={data.recipeId} className='h-10 border-b text-center'>
+              <tr key={data.dayOfWeek} className='h-10 border-b text-center'>
                 <th>{data.dayOfWeek}</th>
                 <td
                   className='hover:cursor-pointer hover:text-blue-800 hover:underline'

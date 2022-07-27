@@ -7,11 +7,7 @@ const handler: NextApiHandler = async (req, res) => {
       data: {
         listName: req.body[2].listName,
         list_recipe: {
-          create: [
-            {
-             ...req.body[0][0]
-            },
-          ],
+          create: [ ...req.body[0] ],
         },
         user_list: {
           create: {
@@ -25,6 +21,7 @@ const handler: NextApiHandler = async (req, res) => {
       },
     })
     res.status(200).json(recipeList)
+    console.log(recipeList)
   } catch (recipeList) {
     console.log(...req.body[0])
     res.status(500).json(recipeList)
