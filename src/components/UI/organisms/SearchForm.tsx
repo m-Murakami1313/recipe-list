@@ -15,7 +15,7 @@ export const SearchForm = ({ getData, searchValue, setSearchValue }: any) => {
           <Input textValue={searchValue} handleOnChange={setSearchValue} placeholder={''} />
           <button
             disabled={!searchValue}
-            className='absolute right-2.5 bottom-2.5 rounded-lg bg-blue-700  px-4 py-2 text-sm font-medium text-white'
+            className='absolute bottom-1.5 right-2.5 rounded-lg bg-blue-700  px-4 py-2 text-sm font-medium text-white'
             onClick={getData}
           >
             Search
