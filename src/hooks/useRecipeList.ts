@@ -71,8 +71,11 @@ export const useRecipeList = () => {
       recipeId: data.id,
       dayOfWeek: data.day,
     }))
-    const formData = [list, { userId: userId }, { listName: recipeListName }]
-    console.log(formData)
+    const newList = list.filter((data) => {
+      return !(data.recipeId === '')
+    })
+    const formData = [newList, { userId: userId }, { listName: recipeListName }]
+    console.log(newList)
     const response = await fetch('../../api/createRecipeListAPI', {
       method: 'POST',
       body: JSON.stringify(formData),
