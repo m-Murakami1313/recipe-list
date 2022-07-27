@@ -38,9 +38,9 @@ export const Layout: React.FC<Title> = ({ children, title }) => {
                 </div>
                 <div className='justify-end'>
                   <div>
-                    <div className='hidden space-x-3 md:inline-block'>
+                    <div className='hidden space-x-3 lg:inline-block'>
                       {pages.map((page) => (
-                        <div key={page.name} className='hidden md:inline-block'>
+                        <div key={page.name} className='hidden lg:inline-block'>
                           <Link href={{ pathname: `/${page.href}` }}>
                             <a>
                               <button className='btn btn-ghost font-normal'>{page.name}</button>
@@ -63,7 +63,7 @@ export const Layout: React.FC<Title> = ({ children, title }) => {
                         </button>
                       )}
                     </div>
-                    <label htmlFor='my-drawer' className='btn btn-ghost drawer-button md:hidden'>
+                    <label htmlFor='my-drawer' className='btn btn-ghost drawer-button lg:hidden'>
                       <svg
                         xmlns='http://www.w3.org/2000/svg'
                         fill='none'
