@@ -6,10 +6,13 @@ import { useRecipeList } from '@/hooks/useRecipeList'
 
 export const SearchList = () => {
   const { getRecipeList, list, searchValue, setSearchValue } = useRecipeList()
-  console.log(list)
+  const label = "リスト検索"
+
+
   return (
     <div className='mt-10'>
       <SearchForm
+        label={label}
         getData={getRecipeList}
         searchValue={searchValue}
         setSearchValue={setSearchValue}

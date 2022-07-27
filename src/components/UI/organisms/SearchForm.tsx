@@ -1,15 +1,15 @@
 import React from 'react'
 import { Input } from '../atom/Input'
 
-export const SearchForm = ({ getData, searchValue, setSearchValue }: any) => {
+export const SearchForm = ({ getData, searchValue, setSearchValue,label }: any) => {
   return (
     <div>
       <form className='flex items-center justify-center'>
         <label
           htmlFor='default-search'
-          className='flex h-12 w-24 items-center justify-center rounded bg-gray-100 text-sm md:mr-5 md:h-14 md:w-24'
+          className='flex h-12 w-24 items-center justify-center rounded bg-gray-100 text-center text-sm md:mr-5'
         >
-          レシピ検索
+          {label}
         </label>
         <div className='relative w-96'>
           <Input textValue={searchValue} handleOnChange={setSearchValue} placeholder={''} />
