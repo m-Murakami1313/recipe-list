@@ -4,7 +4,7 @@ import React from 'react'
 import { RecipeListTable } from '../organisms/RecipeListTable'
 
 export const RecipeListPage = ({ data }: any) => {
-  const tableData = [...data.list_recipe]
+  const tableData = [...data.list_recipe].sort((a, b) => a.tableNo - b.tableNo)
   const router = useRouter()
 
   return (
