@@ -4,7 +4,7 @@ import { Input } from '../atom/Input'
 export const SearchForm = ({ getData, searchValue, setSearchValue,label }: any) => {
   return (
     <div>
-      <form className='flex items-center justify-center'>
+      <form className='flex items-center'>
         <label
           htmlFor='default-search'
           className='flex h-12 w-24 items-center justify-center rounded bg-gray-100 text-center text-sm md:mr-5'

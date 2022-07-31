@@ -24,7 +24,9 @@ const SearchRecipeList: NextPage = () => {
 
   return (
     <Layout title='searchRecipe'>
-      <SearchList />
+      <div className='md:ml-20'>
+        <SearchList />
+      </div>
     </Layout>
   )
 }
