@@ -24,7 +24,7 @@ const CreateRecipe: NextPage = () => {
     <div>
       <Layout title='CreateRecipe'>
         <div className='md:ml-20'>
-          <div className='mt-10 flex items-center justify-center'>
+          <div className='mt-10 flex'>
             <CreateRecipeForm />
           </div>
         </div>

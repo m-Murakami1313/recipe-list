@@ -5,9 +5,15 @@ import { useRecipeList } from '@/hooks/useRecipeList'
 
 export const SearchRecipes = () => {
   const { recipes, getRecipe, searchValue, setSearchValue } = useRecipeList()
+  const label = 'レシピ検索'
   return (
     <div className='mt-10'>
-      <SearchForm getData={getRecipe} searchValue={searchValue} setSearchValue={setSearchValue} />
+      <SearchForm
+        getData={getRecipe}
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+        label={label}
+      />
       <div className='mt-5'>
         <p>検索結果</p>
         <ul>

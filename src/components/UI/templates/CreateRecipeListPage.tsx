@@ -29,6 +29,7 @@ export const CreateRecipeListPage = () => {
     setTableData(initialDataList)
   }, [])
 
+  const label = 'レシピ検索'
   const placeholder = 'リストの名前を記入'
   return (
     <div>
@@ -54,6 +55,7 @@ export const CreateRecipeListPage = () => {
               getData={getRecipe}
               searchValue={searchValue}
               setSearchValue={setSearchValue}
+              label={label}
             />
           </div>
         </div>

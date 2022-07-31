@@ -19,10 +19,12 @@ const SearchRecipe: NextPage = () => {
   if (status === 'loading') {
     return <Home />
   }
-  
+
   return (
     <Layout title='searchRecipe'>
-      <SearchRecipes />
+      <div className='md:ml-20'>
+        <SearchRecipes />
+      </div>
     </Layout>
   )
 }
