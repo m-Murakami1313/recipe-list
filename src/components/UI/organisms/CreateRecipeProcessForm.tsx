@@ -18,7 +18,7 @@ export const CreateRecipeProcessForm = ({
         <form className='py-5' onSubmit={submitProcessData}>
           <div className='flex flex-wrap'>
             {createRecipeDataSet.map((data: any, index: number) => (
-              <div key={index} className='mt-5 flex w-full justify-center lg:w-1/2'>
+              <div key={index} className='mt-5 flex justify-center lg:ml-5'>
                 <label
                   className='flex h-10 w-10 items-center justify-center rounded bg-gray-100 text-center'
                   htmlFor={index.toString()}
@@ -28,7 +28,7 @@ export const CreateRecipeProcessForm = ({
                 <textarea
                   id={index.toString()}
                   rows={4}
-                  className='block w-96 rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-lg text-gray-900 '
+                  className='block w-72 rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-lg text-gray-900 sm:w-96 '
                   placeholder='レシピを記入'
                   onChange={handleChangeData}
                   value={data.processName}
@@ -43,8 +43,9 @@ export const CreateRecipeProcessForm = ({
               </div>
             ))}
           </div>
-          <div className='mt-10 flex items-center justify-center'>
-            <button type='submit' className='btn btn-ghost bg-yellow-400 p-2'>
+          <div className='mt-10 flex items-center'>
+            <label className='text-2xl'>レシピ登録</label>
+            <button type='submit' className='btn btn-ghost ml-5 bg-yellow-400 p-2'>
               レシピ登録
             </button>
           </div>
