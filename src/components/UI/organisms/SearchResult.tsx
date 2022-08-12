@@ -1,6 +1,16 @@
 import Link from 'next/link'
 import React from 'react'
 
+import { recipeListType } from '@/types/createRecipeListTypes'
+interface Props {
+  recipes: recipeListType[]
+  options: { day: string; id: number }[]
+  getTarget: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+  recipeFlag: boolean
+  setPickDayId: React.Dispatch<React.SetStateAction<string>>
+  onSubmitList: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+}
+
 export const SearchResult = ({
   recipes,
   options,
@@ -8,7 +18,7 @@ export const SearchResult = ({
   recipeFlag,
   setPickDayId,
   onSubmitList,
-}: any) => {
+}: Props) => {
   return (
     <div className='mt-5'>
       <p>検索結果</p>
@@ -27,13 +37,13 @@ export const SearchResult = ({
               <>
                 <select
                   className='select mx-10 max-w-xs'
-                  onChange={(e: any) => {
+                  onChange={(e: React.ChangeEvent<HTMLSelectElement>) => {
                     setPickDayId(e.target.value)
                   }}
                   defaultValue={0}
                 >
                   <option>登録する曜日を選んでください</option>
-                  {options.map((option: any) => (
+                  {options.map((option: { day: string; id: number }) => (
                     <option value={option.id} key={option.id}>
                       {option.day}
                     </option>

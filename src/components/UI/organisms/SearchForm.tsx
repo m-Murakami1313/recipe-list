@@ -1,7 +1,14 @@
 import React from 'react'
 import { Input } from '../atom/Input'
 
-export const SearchForm = ({ getData, searchValue, setSearchValue,label }: any) => {
+interface Props {
+  getData: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+  searchValue: string
+  setSearchValue: React.Dispatch<React.SetStateAction<string>>
+  label: string
+}
+
+export const SearchForm = ({ getData, searchValue, setSearchValue, label }: Props) => {
   return (
     <div>
       <form className='flex items-center'>

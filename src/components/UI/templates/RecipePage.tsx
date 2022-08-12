@@ -3,7 +3,22 @@ import React from 'react'
 import { RecipeProcessTable } from '../organisms/RecipeProcessTable'
 import { RecipeTable } from '../organisms/RecipeTable'
 
-export const RecipePage = ({ recipeName, ingredients, process, url }: any) => {
+interface Props {
+  recipeName: string
+  ingredients: {
+    ingredientsName: string
+    weight: string
+    id: string
+  }[]
+  process: {
+    processNo: number
+    processName: string
+    id: string
+  }[]
+  url: string
+}
+
+export const RecipePage = ({ recipeName, ingredients, process, url }: Props) => {
   const tableHeadIngredients = ['使用原材料・調味料', '重さ']
   const tableHeadProcess = ['工程番号', '工程']
   return (
