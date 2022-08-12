@@ -1,8 +1,18 @@
 import { useRouter } from 'next/router'
 import React from 'react'
+
 import { TABLE_DEFINE_List } from '../../../libs/tableData'
 
-export const RecipeListTable = ({ tableData }: any) => {
+interface Props{
+  recipeId: string;
+  tableNo: number;
+  dayOfWeek: string;
+  recipe: {
+      recipeName: string;
+  };
+}
+
+export const RecipeListTable = ({tableData}:any) => {
   const router = useRouter()
 
   return (
