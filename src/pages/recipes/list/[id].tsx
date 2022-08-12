@@ -1,26 +1,25 @@
+import { ParsedUrlQuery } from 'node:querystring'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { useSession } from 'next-auth/react'
-import { useRouter } from "next/router";
-import prisma from '../../../libs/prisma'
+import { useRouter } from 'next/router'
+import prisma, { List } from '../../../libs/prisma'
 
 import { Layout } from '@/components/Layout'
 import { RecipeListPage } from '@/components/UI/templates/RecipeListPage'
-import Home from '@/pages';
-
+import Home from '@/pages'
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const listData = await prisma.list.findMany()
-  const paths = listData.map((list: any) => ({ params: { id: list.id } }))
+  const paths = listData.map((list: List) => ({ params: { id: list.id } }))
   return {
     paths,
     fallback: 'blocking',
   }
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }: any) => {
-
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const data = await prisma.list.findUnique({
-    where: { id: params.id },
+    where: { id: params?.id as string },
     select: {
       listName: true,
       id: true,
@@ -28,7 +27,7 @@ export const getStaticProps: GetStaticProps = async ({ params }: any) => {
         select: {
           recipeId: true,
           tableNo: true,
-          dayOfWeek:true,
+          dayOfWeek: true,
           recipe: {
             select: {
               recipeName: true,
@@ -47,8 +46,24 @@ export const getStaticProps: GetStaticProps = async ({ params }: any) => {
   }
 }
 
-export default function User({ data }: any) {
-  const router = useRouter();
+interface Data {
+  data: {
+    listName: string
+    id: string
+    list_recipe: {
+      recipeId: string
+      tableNo: number
+      dayOfWeek: string
+      recipe: {
+        recipeName: string
+      }
+    }[]
+  }
+}
+
+export default function User({ data }: Data) {
+  const { listName, list_recipe } = data
+  const router = useRouter()
   const { status } = useSession({
     required: true,
     onUnauthenticated() {
@@ -65,7 +80,7 @@ export default function User({ data }: any) {
     <Layout title='recipe'>
       <div className='md:ml-20'>
         <div className='mt-10'>
-          <RecipeListPage data={data}/>
+          <RecipeListPage listName={listName} list_recipe={list_recipe} />
         </div>
       </div>
     </Layout>

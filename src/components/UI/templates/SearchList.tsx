@@ -1,13 +1,13 @@
 import Link from 'next/link'
 import React from 'react'
-import { Layout } from '@/components/Layout'
+
 import { SearchForm } from '@/components/UI/organisms/SearchForm'
 import { useRecipeList } from '@/hooks/useRecipeList'
+import { listDataType } from '@/types/createRecipeListTypes'
 
 export const SearchList = () => {
-  const { getRecipeList, list, searchValue, setSearchValue } = useRecipeList()
-  const label = "リスト検索"
-
+  const { getRecipeList, listData, searchValue, setSearchValue } = useRecipeList()
+  const label = 'リスト検索'
 
   return (
     <div className='mt-10'>
@@ -20,7 +20,7 @@ export const SearchList = () => {
       <div className='mt-5'>
         <p>検索結果</p>
         <ul>
-          {list.map((data: any) => (
+          {listData.map((data: listDataType) => (
             <div key={data.id} className='flex items-center py-4'>
               <Link href={`../../recipes/list/${data.id}`}>
                 <a>

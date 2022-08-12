@@ -2,6 +2,7 @@ import Link from 'next/link'
 import React from 'react'
 import { SearchForm } from '@/components/UI/organisms/SearchForm'
 import { useRecipeList } from '@/hooks/useRecipeList'
+import { recipeListType } from '@/types/createRecipeListTypes'
 
 export const SearchRecipes = () => {
   const { recipes, getRecipe, searchValue, setSearchValue } = useRecipeList()
@@ -17,7 +18,7 @@ export const SearchRecipes = () => {
       <div className='mt-5'>
         <p>検索結果</p>
         <ul>
-          {recipes.map((recipe: any) => (
+          {recipes.map((recipe: recipeListType) => (
             <div key={recipe.id} className='flex items-center py-4'>
               <Link href={`../../recipes/${recipe.id}`}>
                 <a>
