@@ -43,7 +43,11 @@ export const CreateRecipeListPage = () => {
             textValue={recipeListName}
             handleOnChange={setRecipeListName}
             placeholder={placeholder}
+            textLength={20}
           />
+          {recipeListName.length >= 20 && (
+            <p className='text-red-500'>２０文字以内で入力してください </p>
+          )}
           <button type='submit' className='btn btn-ghost ml-7  bg-yellow-400 p-2'>
             レシピリストを登録
           </button>

@@ -14,17 +14,30 @@ export const CreateRecipeNameForm = ({ setRecipeName, recipeName, url, setUrl }:
         <label htmlFor='name' className='text-2xl'>
           レシピ名
         </label>
-        <Input
-          textValue={recipeName}
-          handleOnChange={setRecipeName}
-          placeholder={'レシピ名を記入'}
-        />
+
+        <div>
+          <Input
+            textValue={recipeName}
+            handleOnChange={setRecipeName}
+            placeholder={'レシピ名を記入'}
+            textLength={20}
+          />
+          {recipeName.length >= 20 && (
+            <p className='text-red-500'>２０文字以内で入力してください </p>
+          )}
+        </div>
       </div>
       <div className='mt-10'>
         <label htmlFor='name' className='text-2xl'>
           参考URL
         </label>
-        <Input textValue={url} handleOnChange={setUrl} placeholder={'参考URLを記入'} />
+        <Input
+          textValue={url}
+          handleOnChange={setUrl}
+          placeholder={'参考URLを記入'}
+          textLength={40}
+        />
+        {url.length >= 40 && <p className='text-red-500'>４０文字以内で入力してください </p>}
       </div>
     </div>
   )

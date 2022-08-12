@@ -19,7 +19,15 @@ export const SearchForm = ({ getData, searchValue, setSearchValue, label }: Prop
           {label}
         </label>
         <div className='relative w-96'>
-          <Input textValue={searchValue} handleOnChange={setSearchValue} placeholder={''} />
+          <Input
+            textValue={searchValue}
+            handleOnChange={setSearchValue}
+            placeholder={''}
+            textLength={20}
+          />
+          {searchValue.length >= 20 && (
+            <p className='text-red-500'>２０文字以内で入力してください </p>
+          )}
           <button
             disabled={!searchValue}
             className='absolute bottom-1.5 right-2.5 rounded-lg bg-blue-700  px-4 py-2 text-sm font-medium text-white'
