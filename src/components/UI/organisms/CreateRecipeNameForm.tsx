@@ -1,6 +1,13 @@
 import { Input } from '../atom/Input'
 
-export const CreateRecipeNameForm = ({ setRecipeName, recipeName, url, setUrl }: any) => {
+interface Props {
+  setRecipeName: React.Dispatch<React.SetStateAction<string>>
+  recipeName: string
+  url: string
+  setUrl: React.Dispatch<React.SetStateAction<string>>
+}
+
+export const CreateRecipeNameForm = ({ setRecipeName, recipeName, url, setUrl }: Props) => {
   return (
     <div>
       <div>
