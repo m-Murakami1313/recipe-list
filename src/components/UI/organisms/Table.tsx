@@ -1,6 +1,12 @@
 import { TABLE_DEFINE } from '../../../libs/tableData'
+import { daysType } from '@/types/tableTypes'
 
-export const Table = ({ tableData, deleteRecipe }: any) => {
+interface Props {
+  tableData: daysType[]
+  deleteRecipe: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+}
+
+export const Table = ({ tableData, deleteRecipe }: Props) => {
   return (
     <div className='relative w-full overflow-x-auto shadow-md sm:rounded-lg lg:w-4/5'>
       <table className='w-full text-gray-500'>
@@ -24,7 +30,7 @@ export const Table = ({ tableData, deleteRecipe }: any) => {
         </thead>
         <tbody className='text-sm md:text-lg'>
           {tableData &&
-            tableData.map((day: any, index: any) => (
+            tableData.map((day: daysType, index: number) => (
               <tr key={day.day} className='h-10 border-b text-center'>
                 <th>{day.day}</th>
                 <td>{day.recipe}</td>

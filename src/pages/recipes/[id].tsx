@@ -16,9 +16,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }: any) => {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const data = await prisma.recipe.findUnique({
-    where: { id: params.id },
+    where: { id: params?.id as string },
     select: {
       recipeName: true,
       id: true,
@@ -48,9 +48,26 @@ export const getStaticProps: GetStaticProps = async ({ params }: any) => {
   }
 }
 
-export default function User({ data }: any) {
+interface Data {
+  data: {
+    recipeName: string
+    process: {
+      processNo: number
+      processName: string
+      id: string
+    }[]
+    ingredients: {
+      ingredientsName: string
+      weight: string
+      id: string
+    }[]
+    url: string
+  }
+}
+
+export default function User(data: Data) {
   const router = useRouter()
-  const { recipeName, id, process, ingredients, url } = data
+  const { recipeName, process, ingredients, url } = data.data
   const { status } = useSession({
     required: true,
     onUnauthenticated() {

@@ -31,6 +31,7 @@ export const CreateRecipeListPage = () => {
 
   const label = 'レシピ検索'
   const placeholder = 'リストの名前を記入'
+
   return (
     <div>
       <form onSubmit={submitRecipeList}>

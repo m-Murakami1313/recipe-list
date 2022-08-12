@@ -8,7 +8,7 @@ export const useCreateRecipe = () => {
     createIngredientsTypes[]
   >([])
   const [recipeName, setRecipeName] = useState<string>('')
-  const [url, setUrl] = useState('')
+  const [url, setUrl] = useState<string>('')
 
   const { data: session } = useSession()
 
@@ -17,32 +17,32 @@ export const useCreateRecipe = () => {
     setCreateRecipeDataset(newData)
   }
 
-  const deleteData = (e: any) => {
+  const deleteData = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
-    const targetId = Number(e.target.id)
+    const targetId = Number(e.currentTarget.id)
     const oldData = [...createRecipeDataSet]
     const newData = oldData.filter((data, index) => index !== targetId)
     setCreateRecipeDataset(newData)
   }
 
-  const handleChangeData = (e: any) => {
+  const handleChangeData = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     e.preventDefault()
-    const targetValue = e.target.value
-    const targetId = Number(e.target.id)
+    const targetValue = e.currentTarget.value
+    const targetId = Number(e.currentTarget.id)
     const oldData = [...createRecipeDataSet]
     const newData = { ...oldData[targetId], processName: targetValue }
     const newDataSet = oldData.map((data, index) => (index === targetId ? newData : data))
     setCreateRecipeDataset(newDataSet)
   }
 
-  const submitProcessData = async (e: any) => {
+  const submitProcessData = async (e:React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const oldData = [...createRecipeDataSet]
     const newDataSet = oldData.map((data, index) => ({
       processName: data.processName,
       processNo: index + 1,
     }))
-    const recipeDataSet = [recipeName, newDataSet, createIngredientsDataSet,url,session?.user.id]
+    const recipeDataSet = [recipeName, newDataSet, createIngredientsDataSet, url, session?.user.id]
     console.log(recipeDataSet)
     const response = await fetch('../api/createRecipe', {
       method: 'POST',
@@ -57,15 +57,15 @@ export const useCreateRecipe = () => {
       console.log(response.status)
     }
   }
-  const deleteIngredientsData = (e: any) => {
+  const deleteIngredientsData = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
-    const targetId = Number(e.target.id)
+    const targetId = Number(e.currentTarget.id)
     const oldData = [...createIngredientsDataSet]
     const newData = oldData.filter((data, index) => index !== targetId)
     setCreateIngredientsDataSet(newData)
   }
 
-  const handleChangeIngredientsName = (e: any) => {
+  const handleChangeIngredientsName = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
     const targetValue = e.target.value
     const targetId = Number(e.target.id)
@@ -75,7 +75,7 @@ export const useCreateRecipe = () => {
     setCreateIngredientsDataSet(newDataSet)
   }
 
-  const handleChangeIngredientsWeight = (e: any) => {
+  const handleChangeIngredientsWeight = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
     const targetValue = e.target.value
     const targetId = Number(e.target.id)
@@ -84,6 +84,7 @@ export const useCreateRecipe = () => {
     const newDataSet = oldData.map((data, index) => (index === targetId ? newData : data))
     setCreateIngredientsDataSet(newDataSet)
   }
+
   const addEmptyIngredients = () => {
     const newData = [...createIngredientsDataSet, { ingredientsName: '', weight: '' }]
     setCreateIngredientsDataSet(newData)
@@ -104,6 +105,7 @@ export const useCreateRecipe = () => {
     createIngredientsDataSet,
     setCreateIngredientsDataSet,
     addEmptyIngredients,
-    url,setUrl
+    url,
+    setUrl,
   }
 }

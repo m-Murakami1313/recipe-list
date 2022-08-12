@@ -1,6 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 
 import { createIngredientsTypes } from '@/types/createRecipeTypes'
+
+interface Props {
+  handleChangeIngredientsName: (e: React.ChangeEvent<HTMLInputElement>) => void
+  handleChangeIngredientsWeight: (e: React.ChangeEvent<HTMLInputElement>) => void
+  deleteIngredientsData: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+  createIngredientsDataSet: createIngredientsTypes[]
+  addEmptyIngredients: () => void
+}
 
 export const CreateIngredients = ({
   handleChangeIngredientsName,
@@ -8,9 +16,7 @@ export const CreateIngredients = ({
   deleteIngredientsData,
   createIngredientsDataSet,
   addEmptyIngredients,
-}: any) => {
-  console.log(createIngredientsDataSet)
-
+}: Props) => {
   return (
     <div className='mt-20'>
       <div className='flex items-center'>

@@ -1,11 +1,20 @@
+import { createRecipeTypes } from '@/types/createRecipeTypes'
+
+interface Props {
+  addEmpty: () => void
+  deleteData: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+  handleChangeData: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
+  submitProcessData: (e: React.FormEvent<HTMLFormElement>) => void
+  createRecipeDataSet: createRecipeTypes[]
+}
+
 export const CreateRecipeProcessForm = ({
   addEmpty,
   deleteData,
   handleChangeData,
   submitProcessData,
   createRecipeDataSet,
-}: any) => {
-  console.log(createRecipeDataSet)
+}: Props) => {
   return (
     <div>
       <div className='mt-20 flex items-center justify-start'>
@@ -17,7 +26,7 @@ export const CreateRecipeProcessForm = ({
       <div>
         <form className='py-5' onSubmit={submitProcessData}>
           <div className='flex flex-wrap'>
-            {createRecipeDataSet.map((data: any, index: number) => (
+            {createRecipeDataSet.map((data: createRecipeTypes, index: number) => (
               <div key={index} className='mt-5 flex justify-center lg:ml-5'>
                 <label
                   className='flex h-10 w-10 items-center justify-center rounded bg-gray-100 text-center'

@@ -1,22 +1,23 @@
 import { useSession } from 'next-auth/react'
 import { useState } from 'react'
 
+import { listDataType, recipeListType } from '@/types/createRecipeListTypes'
 import { daysType } from '@/types/tableTypes'
 
 export const useRecipeList = () => {
-  const [recipes, setRecipes] = useState<any>([])
-  const [pickDayId, setPickDayId] = useState<number>(0)
-  const [recipeFlag, setRecipeFlag] = useState(false)
+  const [recipes, setRecipes] = useState<recipeListType[]>([])
+  const [pickDayId, setPickDayId] = useState<string>("")
+  const [recipeFlag, setRecipeFlag] = useState<boolean>(false)
   const [tableData, setTableData] = useState<daysType[]>([])
-  const [recipeListName, setRecipeListName] = useState('')
-  const [searchValue, setSearchValue] = useState('')
-  const [list, setList] = useState([])
+  const [recipeListName, setRecipeListName] = useState<string>('')
+  const [searchValue, setSearchValue] = useState<string>('')
+  const [listData, setListData] = useState<listDataType[]>([])
 
   const { data: session } = useSession()
 
   const userId = session?.user.id
 
-  const getRecipe = async (e: any) => {
+  const getRecipe = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
     setRecipeFlag(false)
     const response = await fetch('../../api/searchRecipeDataAPI', {
@@ -26,7 +27,7 @@ export const useRecipeList = () => {
         'Content-Type': 'application/json',
       },
     })
-    const json = await response.json()
+    const json: recipeListType[] = await response.json()
     if (response.ok) {
       console.log(response.status)
       console.log(json)
@@ -36,33 +37,35 @@ export const useRecipeList = () => {
     }
   }
 
-  const getTarget = (e: any) => {
+  const getTarget = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const recipeData = [...recipes]
-    const targetData = recipeData[e.target.id]
+    const targetData = recipeData[Number(e.currentTarget.id)]
     setRecipes([targetData])
     setRecipeFlag(true)
   }
 
-  const onSubmitList = (e: any) => {
+  const onSubmitList = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
     setRecipeFlag(false)
     const oldData = [...tableData]
-    const newData = { ...oldData[pickDayId - 1], recipe: recipes[0].recipeName, id: recipes[0].id }
+    const newData = { ...oldData[Number(pickDayId) - 1], recipe: recipes[0].recipeName, id: recipes[0].id }
     const newDataSet = oldData.map((data) => (data.tableNo === Number(pickDayId) ? newData : data))
     setTableData(newDataSet)
     setRecipes([])
-    setPickDayId(0)
+    setPickDayId("")
   }
 
-  const deleteRecipe = (e: any) => {
+  const deleteRecipe = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
     const oldData = [...tableData]
-    const newData = { ...oldData[e.target.id], recipe: '' }
-    const newDatas = oldData.map((data, index) => (index === Number(e.target.id) ? newData : data))
+    const newData = { ...oldData[Number(e.currentTarget.id)], recipe: '' }
+    const newDatas = oldData.map((data, index) =>
+      index === Number(e.currentTarget.id) ? newData : data,
+    )
     setTableData(newDatas)
   }
 
-  const submitRecipeList = async (e: any) => {
+  const submitRecipeList = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setRecipeFlag(false)
     const newData = [...tableData]
@@ -91,7 +94,7 @@ export const useRecipeList = () => {
     }
   }
 
-  const getRecipeList = async (e: any) => {
+  const getRecipeList = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
     const response = await fetch('../../api/searchRecipeListAPI', {
       method: 'POST',
@@ -104,7 +107,7 @@ export const useRecipeList = () => {
     if (response.ok) {
       console.log(response.status)
       console.log(json)
-      setList(json)
+      setListData(json)
     } else {
       console.log(response.status)
     }
@@ -127,6 +130,6 @@ export const useRecipeList = () => {
     searchValue,
     setSearchValue,
     getRecipeList,
-    list,
+    listData,
   }
 }
