@@ -6,6 +6,7 @@ interface Props {
   handleChangeData: (e: React.ChangeEvent<HTMLTextAreaElement>) => void
   submitProcessData: (e: React.FormEvent<HTMLFormElement>) => void
   createRecipeDataSet: createRecipeTypes[]
+  recipeName: string
 }
 
 export const CreateRecipeProcessForm = ({
@@ -14,6 +15,7 @@ export const CreateRecipeProcessForm = ({
   handleChangeData,
   submitProcessData,
   createRecipeDataSet,
+  recipeName,
 }: Props) => {
   return (
     <div>
@@ -27,7 +29,7 @@ export const CreateRecipeProcessForm = ({
         <form className='py-5' onSubmit={submitProcessData}>
           <div className='flex flex-wrap'>
             {createRecipeDataSet.map((data: createRecipeTypes, index: number) => (
-              <div key={index} className='mt-5 flex justify-center lg:ml-5'>
+              <div key={index} className='mt-5 mr-5 justify-center'>
                 <label
                   className='flex h-10 w-10 items-center justify-center rounded bg-gray-100 text-center'
                   htmlFor={index.toString()}
@@ -41,8 +43,13 @@ export const CreateRecipeProcessForm = ({
                   placeholder='レシピを記入'
                   onChange={handleChangeData}
                   value={data.processName}
-                  maxLength={60}
+                  maxLength={160}
                 ></textarea>
+                <div>
+                  {data.processName.length >= 160 && (
+                    <p className='text-red-500'>１６０文字以内で入力してください </p>
+                  )}
+                </div>
                 <button
                   id={index.toString()}
                   onClick={deleteData}
@@ -55,7 +62,11 @@ export const CreateRecipeProcessForm = ({
           </div>
           <div className='mt-10 flex items-center'>
             <label className='text-2xl'>レシピ登録</label>
-            <button type='submit' className='btn btn-ghost ml-5 bg-yellow-400 p-2'>
+            <button
+              disabled={!recipeName}
+              type='submit'
+              className='btn btn-ghost ml-5 bg-yellow-400 p-2'
+            >
               レシピ登録
             </button>
           </div>
