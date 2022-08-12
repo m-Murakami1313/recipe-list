@@ -41,6 +41,7 @@ export const CreateRecipeProcessForm = ({
                   placeholder='レシピを記入'
                   onChange={handleChangeData}
                   value={data.processName}
+                  maxLength={60}
                 ></textarea>
                 <button
                   id={index.toString()}
