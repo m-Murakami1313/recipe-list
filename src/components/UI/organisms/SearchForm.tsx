@@ -22,21 +22,21 @@ export const SearchForm = ({ getData, searchValue, setSearchValue, label }: Prop
           <Input
             textValue={searchValue}
             handleOnChange={setSearchValue}
-            placeholder={''}
+            placeholder={'レシピを検索'}
             textLength={20}
           />
-          {searchValue.length >= 20 && (
-            <p className='text-red-500'>２０文字以内で入力してください </p>
-          )}
           <button
             disabled={!searchValue}
             className='absolute bottom-1.5 right-2.5 rounded-lg bg-blue-700  px-4 py-2 text-sm font-medium text-white'
             onClick={getData}
-          >
+            >
             Search
           </button>
         </div>
       </form>
+            {searchValue.length >= 20 && (
+              <p className='text-red-500'>２０文字以内で入力してください </p>
+            )}
     </div>
   )
 }
