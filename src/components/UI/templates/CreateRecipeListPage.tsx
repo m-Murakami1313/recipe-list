@@ -38,13 +38,19 @@ export const CreateRecipeListPage = () => {
         <div className='mt-10 flex items-center justify-center'>
           <Table tableData={tableData} deleteRecipe={deleteRecipe} />
         </div>
-        <div className='mt-10 flex items-center justify-center'>
-          <Input
-            textValue={recipeListName}
-            handleOnChange={setRecipeListName}
-            placeholder={placeholder}
-          />
-          <button type='submit' className='btn btn-ghost ml-7  bg-yellow-400 p-2'>
+        <div className='mt-10 md:flex md:justify-center'>
+          <div>
+            <Input
+              textValue={recipeListName}
+              handleOnChange={setRecipeListName}
+              placeholder={placeholder}
+              textLength={20}
+            />
+            {recipeListName.length >= 20 && (
+              <p className='text-red-500'>２０文字以内で入力してください </p>
+            )}
+          </div>
+          <button disabled={!recipeListName} type='submit' className='btn btn-ghost bg-yellow-400  p-2 md:ml-7'>
             レシピリストを登録
           </button>
         </div>
