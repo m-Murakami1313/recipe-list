@@ -3,16 +3,18 @@ import React from 'react'
 
 import { TABLE_DEFINE_List } from '../../../libs/tableData'
 
-interface Props{
-  recipeId: string;
-  tableNo: number;
-  dayOfWeek: string;
-  recipe: {
-      recipeName: string;
-  };
+interface Props {
+  tableData: {
+    recipeId: string
+    tableNo: number
+    dayOfWeek: string
+    recipe: {
+      recipeName: string
+    }
+  }[]
 }
 
-export const RecipeListTable = ({tableData}:any) => {
+export const RecipeListTable = ({ tableData }: Props) => {
   const router = useRouter()
 
   return (
