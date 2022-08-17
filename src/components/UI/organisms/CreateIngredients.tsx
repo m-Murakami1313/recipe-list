@@ -52,7 +52,11 @@ export const CreateIngredients = ({
             {data.weight.length >= 20 && (
               <p className='text-red-500'>２０文字以内で入力してください </p>
             )}
-            <button className='btn btn-ghost bg-yellow-400 p-2' onClick={deleteIngredientsData}>
+            <button
+              id={index.toString()}
+              className='btn btn-ghost bg-yellow-400 p-2'
+              onClick={deleteIngredientsData}
+            >
               欄削除
             </button>
           </div>
