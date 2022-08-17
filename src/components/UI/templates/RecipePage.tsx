@@ -23,11 +23,12 @@ export const RecipePage = ({ recipeName, ingredients, process, url }: Props) => 
   const tableHeadProcess = ['工程番号', '工程']
   return (
     <div>
-      <div className='mb-10 lg:flex lg:items-end'>
-        <h1 className='text-2xl'>レシピ名:{recipeName}</h1>
-        <h2 className='mt-5 lg:ml-20'>参考URL</h2>
-        <a href={`${url}`} target='_blank' rel='noopener noreferrer'>
-          <h3 className='hover:text-blue-800 hover:underline lg:ml-20'>{url}</h3>
+      <div className='mb-10'>
+        <h1 className='text-xl sm:text-2xl'>レシピ名</h1>
+        <p className='text-xl sm:text-2xl'>{recipeName}</p>
+        <h2 className='mt-5 text-base sm:text-xl '>参考URL</h2>
+        <a className='break-words' href={`${url}`} target='_blank' rel='noopener noreferrer'>
+          <h3 className='hover:text-blue-800 hover:underline '>{url}</h3>
         </a>
       </div>
       <div className='mb-10'>
