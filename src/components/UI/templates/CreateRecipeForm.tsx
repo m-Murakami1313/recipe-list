@@ -51,6 +51,7 @@ export const CreateRecipeForm = () => {
         deleteData={deleteData}
         handleChangeData={handleChangeData}
         submitProcessData={submitProcessData}
+        recipeName={recipeName}
       />
     </div>
   )
