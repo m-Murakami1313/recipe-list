@@ -32,26 +32,27 @@ export const CreateIngredients = ({
           <div key={index} className=''>
             <input
               id={index.toString()}
-              className='block w-80 rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-base text-gray-900  md:text-lg '
+              className='block w-4/5 rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-base text-gray-900 sm:w-96  md:text-lg '
               placeholder='調味料・食材'
               onChange={handleChangeIngredientsName}
               value={data.ingredientsName}
               maxLength={20}
             />
-              {data.ingredientsName.length >= 20 && <p className='text-red-500'>２０文字以内で入力してください </p>}
+            {data.ingredientsName.length >= 20 && (
+              <p className='text-red-500'>２０文字以内で入力してください </p>
+            )}
             <input
               id={index.toString()}
-              className='block w-80 rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-base text-gray-900  md:text-lg'
+              className='block w-4/5 rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-base text-gray-900 sm:w-96  md:text-lg'
               placeholder='使用量'
               onChange={handleChangeIngredientsWeight}
               value={data.weight}
               maxLength={20}
-              />
-              {data.weight.length >= 20 && <p className='text-red-500'>２０文字以内で入力してください </p>}
-            <button
-              className='btn btn-ghost bg-yellow-400 p-2'
-              onClick={deleteIngredientsData}
-              >
+            />
+            {data.weight.length >= 20 && (
+              <p className='text-red-500'>２０文字以内で入力してください </p>
+            )}
+            <button className='btn btn-ghost bg-yellow-400 p-2' onClick={deleteIngredientsData}>
               欄削除
             </button>
           </div>

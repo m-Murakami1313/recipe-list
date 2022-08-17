@@ -22,7 +22,7 @@ export const RecipeTable = ({ tableData, tableHead }: Props) => {
             ))}
           </tr>
         </thead>
-        <tbody className='text-sm md:text-lg'>
+        <tbody className=' break-words text-sm md:text-lg'>
           {tableData.map((data: { ingredientsName: string; weight: string; id: string }) => (
             <tr key={data.id} className='h-10 border-b text-center'>
               <td>{data.ingredientsName}</td>

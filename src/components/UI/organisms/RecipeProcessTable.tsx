@@ -18,11 +18,11 @@ export const RecipeProcessTable = ({ tableData, tableHead }: Props) => {
             ))}
           </tr>
         </thead>
-        <tbody className='text-sm md:text-lg'>
+        <tbody className='break-words text-sm md:text-lg'>
           {tableData.map((data: { processNo: number; processName: string; id: string }) => (
             <tr key={data.id} className='h-10 border-b text-center'>
               <td>{data.processNo}</td>
-              <td>{data.processName}</td>
+              <td className="text-left">{data.processName}</td>
             </tr>
           ))}
         </tbody>
