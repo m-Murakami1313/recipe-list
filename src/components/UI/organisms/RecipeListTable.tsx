@@ -40,7 +40,7 @@ export const RecipeListTable = ({ tableData }: Props) => {
         </thead>
         <tbody className='text-sm md:text-lg'>
           {tableData &&
-            tableData.map((data: any) => (
+            tableData.map((data) => (
               <tr key={data.dayOfWeek} className='h-10 border-b text-center'>
                 <th>{data.dayOfWeek}</th>
                 <td
