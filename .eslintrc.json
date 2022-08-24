@@ -10,6 +10,7 @@
     "*.config.js"
   ],
   "rules": {
+    "react-hooks/exhaustive-deps": "off",
     "import/order": [
       "error",
       {
