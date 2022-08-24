@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { Input } from '../atom/Input'
 
 interface Props {
@@ -8,7 +8,8 @@ interface Props {
   label: string
 }
 
-export const SearchForm = ({ getData, searchValue, setSearchValue, label }: Props) => {
+// eslint-disable-next-line react/display-name
+export const SearchForm = memo(({ getData, searchValue, setSearchValue, label }: Props) => {
   return (
     <div>
       <form className='flex items-center'>
@@ -36,4 +37,4 @@ export const SearchForm = ({ getData, searchValue, setSearchValue, label }: Prop
       {searchValue.length >= 20 && <p className='text-red-500'>２０文字以内で入力してください </p>}
     </div>
   )
-}
+})
