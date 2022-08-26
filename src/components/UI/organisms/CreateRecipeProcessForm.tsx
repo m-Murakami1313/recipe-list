@@ -1,5 +1,3 @@
-import { memo } from 'react'
-
 import { createRecipeTypes } from '@/types/createRecipeTypes'
 
 interface Props {
@@ -11,8 +9,8 @@ interface Props {
   recipeName: string
 }
 
-// eslint-disable-next-line react/display-name
-export const CreateRecipeProcessForm = memo(({
+
+export const CreateRecipeProcessForm = ({
   addEmpty,
   deleteData,
   handleChangeData,
@@ -77,4 +75,4 @@ export const CreateRecipeProcessForm = memo(({
       </div>
     </div>
   )
-})
+}

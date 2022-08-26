@@ -1,5 +1,3 @@
-import { memo } from 'react'
-
 import { TABLE_DEFINE } from '../../../libs/tableData'
 import { daysType } from '@/types/tableTypes'
 
@@ -8,8 +6,8 @@ interface Props {
   deleteRecipe: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 }
 
-// eslint-disable-next-line react/display-name
-export const Table = memo(({ tableData, deleteRecipe }: Props) => {
+
+export const Table = ({ tableData, deleteRecipe }: Props) => {
   return (
     <div className='relative w-full overflow-x-auto shadow-md sm:rounded-lg lg:w-4/5'>
       <table className='w-full text-gray-500'>
@@ -48,4 +46,4 @@ export const Table = memo(({ tableData, deleteRecipe }: Props) => {
       </table>
     </div>
   )
-})
+}

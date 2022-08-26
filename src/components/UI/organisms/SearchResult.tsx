@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import React, { memo } from 'react'
+import React from 'react'
 
 import { recipeListType } from '@/types/createRecipeListTypes'
 interface Props {
@@ -11,8 +11,8 @@ interface Props {
   onSubmitList: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 }
 
-// eslint-disable-next-line react/display-name
-export const SearchResult = memo(({
+
+export const SearchResult = ({
   recipes,
   options,
   getTarget,
@@ -60,4 +60,4 @@ export const SearchResult = memo(({
       </ul>
     </div>
   )
-})
+}
