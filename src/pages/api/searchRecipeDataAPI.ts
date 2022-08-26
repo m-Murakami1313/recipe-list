@@ -18,9 +18,7 @@ const handler: NextApiHandler = async (req, res) => {
       },
     })
     res.status(200).json(recipe)
-    console.log(req.body)
   } catch (error) {
-    console.log(req.body)
     res.status(500).json(error)
   }
 }

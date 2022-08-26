@@ -32,7 +32,6 @@ export const useRecipeList = () => {
     const json: recipeListType[] = await response.json()
     if (response.ok) {
       console.log(response.status)
-      console.log(json)
       setRecipes(json)
     } else {
       console.log(response.status)
@@ -96,7 +95,6 @@ export const useRecipeList = () => {
       console.log(response.status)
     } else {
       console.log(response.status)
-      console.log(response)
     }
   }
 
@@ -112,7 +110,6 @@ export const useRecipeList = () => {
     const json = await response.json()
     if (response.ok) {
       console.log(response.status)
-      console.log(json)
       setListData(json)
     } else {
       console.log(response.status)
