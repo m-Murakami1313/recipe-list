@@ -21,11 +21,8 @@ const handler: NextApiHandler = async (req, res) => {
       },
     })
     res.status(200).json(recipeList)
-    console.log(recipeList)
   } catch (recipeList) {
-    console.log(...req.body[0])
     res.status(500).json(recipeList)
-    console.log(recipeList)
   }
 }
 export default handler

@@ -46,7 +46,6 @@ export const useCreateRecipe = () => {
       processNo: index + 1,
     }))
     const recipeDataSet = [recipeName, newDataSet, createIngredientsDataSet, url, session?.user.id]
-    console.log(recipeDataSet)
     const response = await fetch('../api/createRecipe', {
       method: 'POST',
       body: JSON.stringify(recipeDataSet),
