@@ -1,5 +1,5 @@
 import { useSession } from 'next-auth/react'
-import { useCallback, useState } from 'react'
+import { useState } from 'react'
 
 import { listDataType, recipeListType } from '@/types/createRecipeListTypes'
 import { daysType } from '@/types/tableTypes'
@@ -17,7 +17,9 @@ export const useRecipeList = () => {
 
   const userId = session?.user.id
 
-  const getRecipe = useCallback(async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+
+
+  const getRecipe = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
     setRecipeFlag(false)
     const response = await fetch('../../api/searchRecipeDataAPI', {
@@ -35,16 +37,16 @@ export const useRecipeList = () => {
     } else {
       console.log(response.status)
     }
-  }, [])
+  }
 
-  const getTarget = useCallback((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const getTarget = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     const recipeData = [...recipes]
     const targetData = recipeData[Number(e.currentTarget.id)]
     setRecipes([targetData])
     setRecipeFlag(true)
-  }, [])
+  }
 
-  const onSubmitList = useCallback((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const onSubmitList = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
     setRecipeFlag(false)
     const oldData = [...tableData]
@@ -57,9 +59,9 @@ export const useRecipeList = () => {
     setTableData(newDataSet)
     setRecipes([])
     setPickDayId('')
-  }, [])
+  }
 
-  const deleteRecipe = useCallback((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const deleteRecipe = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
     const oldData = [...tableData]
     const newData = { ...oldData[Number(e.currentTarget.id)], recipe: '' }
@@ -67,9 +69,9 @@ export const useRecipeList = () => {
       index === Number(e.currentTarget.id) ? newData : data,
     )
     setTableData(newDatas)
-  }, [])
+  }
 
-  const submitRecipeList = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
+  const submitRecipeList = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setRecipeFlag(false)
     const newData = [...tableData]
@@ -96,9 +98,9 @@ export const useRecipeList = () => {
       console.log(response.status)
       console.log(response)
     }
-  }, [])
+  }
 
-  const getRecipeList = useCallback(async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const getRecipeList =async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
     const response = await fetch('../../api/searchRecipeListAPI', {
       method: 'POST',
@@ -115,7 +117,7 @@ export const useRecipeList = () => {
     } else {
       console.log(response.status)
     }
-  }, [])
+  }
 
   return {
     getRecipe,

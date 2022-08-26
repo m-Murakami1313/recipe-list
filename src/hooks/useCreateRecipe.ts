@@ -1,5 +1,5 @@
 import { useSession } from 'next-auth/react'
-import { useCallback, useState } from 'react'
+import { useState } from 'react'
 import { createRecipeTypes, createIngredientsTypes } from '@/types/createRecipeTypes'
 
 export const useCreateRecipe = () => {
@@ -12,20 +12,23 @@ export const useCreateRecipe = () => {
 
   const { data: session } = useSession()
 
-  const addEmpty = useCallback(() => {
+
+
+
+  const addEmpty = () => {
     const newData = [...createRecipeDataSet, { processName: '' }]
     setCreateRecipeDataset(newData)
-  }, [])
+  }
 
-  const deleteData = useCallback((e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const deleteData = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault()
     const targetId = Number(e.currentTarget.id)
     const oldData = [...createRecipeDataSet]
     const newData = oldData.filter((data, index) => index !== targetId)
     setCreateRecipeDataset(newData)
-  }, [])
+  }
 
-  const handleChangeData = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
+  const handleChangeData = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     e.preventDefault()
     const targetValue = e.currentTarget.value
     const targetId = Number(e.currentTarget.id)
@@ -33,9 +36,9 @@ export const useCreateRecipe = () => {
     const newData = { ...oldData[targetId], processName: targetValue }
     const newDataSet = oldData.map((data, index) => (index === targetId ? newData : data))
     setCreateRecipeDataset(newDataSet)
-  }, [])
+  }
 
-  const submitProcessData = useCallback(async (e: React.FormEvent<HTMLFormElement>) => {
+  const submitProcessData = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const oldData = [...createRecipeDataSet]
     const newDataSet = oldData.map((data, index) => ({
@@ -56,20 +59,19 @@ export const useCreateRecipe = () => {
     } else {
       console.log(response.status)
     }
-  }, [])
+  }
 
-  const deleteIngredientsData = useCallback(
+  const deleteIngredientsData = 
     (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       e.preventDefault()
       const targetId = Number(e.currentTarget.id)
       const oldData = [...createIngredientsDataSet]
       const newData = oldData.filter((data, index) => index !== targetId)
       setCreateIngredientsDataSet(newData)
-    },
-    [],
-  )
+    }
+   
 
-  const handleChangeIngredientsName = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeIngredientsName =(e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
     const targetValue = e.target.value
     const targetId = Number(e.target.id)
@@ -77,9 +79,9 @@ export const useCreateRecipe = () => {
     const newData = { ...oldData[targetId], ingredientsName: targetValue }
     const newDataSet = oldData.map((data, index) => (index === targetId ? newData : data))
     setCreateIngredientsDataSet(newDataSet)
-  }, [])
+  }
 
-  const handleChangeIngredientsWeight = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChangeIngredientsWeight = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault()
     const targetValue = e.target.value
     const targetId = Number(e.target.id)
@@ -87,12 +89,12 @@ export const useCreateRecipe = () => {
     const newData = { ...oldData[targetId], weight: targetValue }
     const newDataSet = oldData.map((data, index) => (index === targetId ? newData : data))
     setCreateIngredientsDataSet(newDataSet)
-  }, [])
+  }
 
-  const addEmptyIngredients = useCallback(() => {
+  const addEmptyIngredients = () => {
     const newData = [...createIngredientsDataSet, { ingredientsName: '', weight: '' }]
     setCreateIngredientsDataSet(newData)
-  }, [])
+  }
 
   return {
     addEmpty,

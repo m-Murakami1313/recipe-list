@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React from 'react'
 
 import { createIngredientsTypes } from '@/types/createRecipeTypes'
 
@@ -10,8 +10,8 @@ interface Props {
   addEmptyIngredients: () => void
 }
 
-// eslint-disable-next-line react/display-name
-export const CreateIngredients = memo(({
+
+export const CreateIngredients = ({
   handleChangeIngredientsName,
   handleChangeIngredientsWeight,
   deleteIngredientsData,
@@ -65,4 +65,4 @@ export const CreateIngredients = memo(({
       </div>
     </div>
   )
-})
+}

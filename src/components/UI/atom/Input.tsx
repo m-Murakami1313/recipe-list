@@ -1,4 +1,4 @@
-import React, { memo } from 'react'
+import React from 'react'
 
 interface Props {
   textValue: string
@@ -7,8 +7,8 @@ interface Props {
   textLength: number
 }
 
-// eslint-disable-next-line react/display-name
-export const Input = memo(({ textValue, handleOnChange, placeholder, textLength }: Props) => {
+
+export const Input = ({ textValue, handleOnChange, placeholder, textLength }: Props) => {
   return (
     <input
       maxLength={textLength}
@@ -24,4 +24,4 @@ export const Input = memo(({ textValue, handleOnChange, placeholder, textLength 
       }}
     />
   )
-})
+}

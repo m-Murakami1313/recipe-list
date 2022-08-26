@@ -1,6 +1,5 @@
-import React, { memo } from 'react'
+import React from 'react'
 
-import { daysType } from '@/types/tableTypes'
 
 interface Props {
   tableData: {
@@ -11,8 +10,7 @@ interface Props {
   tableHead: string[]
 }
 
-// eslint-disable-next-line react/display-name
-export const RecipeTable = memo(({ tableData, tableHead }: Props) => {
+export const RecipeTable = ({ tableData, tableHead }: Props) => {
   return (
     <div className='relative w-full overflow-x-auto shadow-md sm:rounded-lg lg:w-4/5'>
       <table className='w-full table-fixed text-gray-500'>
@@ -34,4 +32,4 @@ export const RecipeTable = memo(({ tableData, tableHead }: Props) => {
       </table>
     </div>
   )
-})
+}

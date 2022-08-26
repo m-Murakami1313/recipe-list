@@ -1,4 +1,3 @@
-import { memo } from 'react'
 import { Input } from '../atom/Input'
 
 interface Props {
@@ -8,8 +7,7 @@ interface Props {
   setUrl: React.Dispatch<React.SetStateAction<string>>
 }
 
-// eslint-disable-next-line react/display-name
-export const CreateRecipeNameForm = memo(({ setRecipeName, recipeName, url, setUrl }: Props) => {
+export const CreateRecipeNameForm = ({ setRecipeName, recipeName, url, setUrl }: Props) => {
   return (
     <div>
       <div>
@@ -43,4 +41,4 @@ export const CreateRecipeNameForm = memo(({ setRecipeName, recipeName, url, setU
       </div>
     </div>
   )
-})
+}
