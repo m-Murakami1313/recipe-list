@@ -1,0 +1,18 @@
+version: '3.8'
+services:
+  front:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: web
+    volumes:
+      - ./:/usr/src/app # ローカルをコンテナ内にマウント
+    command: sh -c "cd site && yarn dev"
+    environment:
+      - WATCHPACK_POLLING=true
+    ports:
+      - "3000:3000"
+    deploy:
+      resources:
+        limits:
+          memory: 8g
