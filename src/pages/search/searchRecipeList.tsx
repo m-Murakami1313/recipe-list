@@ -1,7 +1,6 @@
 import type { NextPage } from 'next'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
 
 import Home from '..'
 import { Layout } from '@/components/Layout'
