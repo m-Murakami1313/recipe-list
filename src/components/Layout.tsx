@@ -1,10 +1,11 @@
 import { useSession, signIn, signOut } from 'next-auth/react'
 import Head from 'next/head'
 import Link from 'next/link'
+import { ReactNode } from 'react'
 
 interface Title {
   title: string
-  children: any
+  children: ReactNode
 }
 
 export const Layout: React.FC<Title> = ({ children, title }) => {
@@ -21,7 +22,7 @@ export const Layout: React.FC<Title> = ({ children, title }) => {
     <div className=' '>
       <Head>
         <title>{title}</title>
-        <link rel='icon' href='/favicon.ico' />
+        <link rel='icon' href='/favicon-16x16.png' />
       </Head>
       <div className='drawer drawer-end'>
         <input id='my-drawer' type='checkbox' className='drawer-toggle' />
@@ -56,7 +57,7 @@ export const Layout: React.FC<Title> = ({ children, title }) => {
                         <button
                           className='btn btn-ghost font-normal'
                           onClick={() => {
-                            signOut({ callbackUrl: `http://localhost/3000` })
+                            signOut()
                           }}
                         >
                           サインアウト
