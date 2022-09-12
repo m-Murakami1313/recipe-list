@@ -80,7 +80,7 @@ export default function User(data: Data) {
     return <Home />
   }
   return (
-    <Layout title='recipe'>
+    <Layout title='Recipe'>
       <div className='lg:ml-20'>
         <div className='mt-10'>
           <RecipePage
