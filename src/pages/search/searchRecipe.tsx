@@ -21,7 +21,7 @@ const SearchRecipe: NextPage = () => {
   }
 
   return (
-    <Layout title='searchRecipe'>
+    <Layout title='SearchRecipe'>
       <div className='md:ml-20'>
         <SearchRecipes />
       </div>

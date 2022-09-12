@@ -77,7 +77,7 @@ export default function User({ data }: Data) {
   }
 
   return (
-    <Layout title='recipe'>
+    <Layout title='RecipeList'>
       <div className='md:ml-20'>
         <div className='mt-10'>
           <RecipeListPage listName={listName} list_recipe={list_recipe} />

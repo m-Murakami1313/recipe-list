@@ -21,7 +21,7 @@ const CreateRecipeList: NextPage = () => {
   }
   return (
     <div>
-      <Layout title='Home'>
+      <Layout title='CreateRecipeList'>
         <CreateRecipeListPage />
       </Layout>
     </div>
