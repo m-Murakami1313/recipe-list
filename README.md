@@ -6,7 +6,7 @@
 # 使用技術
 - Next.js
 - Docker/Docker-compose
-  node 16.14.0
+  - node 16.14.0
 - Prisma
 - NextAuth
 - Tailwind
