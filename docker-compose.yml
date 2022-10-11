@@ -7,7 +7,7 @@ services:
     container_name: web
     volumes:
       - ./:/usr/src/app # ローカルをコンテナ内にマウント
-    command: sh -c "cd site && yarn dev"
+    command: sh -c "yarn dev"
     environment:
       - WATCHPACK_POLLING=true
     ports:
